@@ -5,7 +5,6 @@ import java.util.List;
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
-import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
 
 import org.springframework.stereotype.Service;
