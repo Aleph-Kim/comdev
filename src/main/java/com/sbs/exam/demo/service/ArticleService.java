@@ -5,6 +5,7 @@ import java.util.List;
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
+import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
 
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ArticleService {
 	public ResultData<Integer> writeArticle(String title, String body, int memberId) {
 		articleRepository.writeArticle(title, body, memberId);
 		int id = articleRepository.getLastInsertId();
-		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), id);
+		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
 	public List<Article> getArticles() {
@@ -37,5 +38,15 @@ public class ArticleService {
 
 	public void modifyArticle(int id, String title, String body) {
 		articleRepository.modifyArticle(id, title, body);
+	}
+
+	public ResultData<Article> actorCanModify(int actorId, Article article) {
+		if (article == null) {
+			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
+		}
+		if (article.getMemberId() != actorId) {
+			return ResultData.from("F-1", "접근 권한이 없습니다.");
+		}
+		return ResultData.from("S-1", "접근이 가능합니다.");
 	}
 }

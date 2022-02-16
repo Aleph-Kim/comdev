@@ -24,7 +24,7 @@ public class MemberService {
         }
         memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
-        return ResultData.from("S-1", Ut.f("환영합니다 %s님, 회원가입에 성공했습니다.", loginId), member);
+        return ResultData.from("S-1", Ut.f("환영합니다 %s님, 회원가입에 성공했습니다.", loginId), "member", member);
     }
 
     public int LastInsertId() {
