@@ -8,16 +8,41 @@ prefix="c"%>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${pageTitle}</title>
+
+        <!-- 제이쿼리 불러오기 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- 테일윈드 불러오기 -->
+        <!-- 노말라이즈, 라이브러리까지 한방에 해결 -->
+        <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+
+        <!-- daisy ui -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/2.0.9/full.css" integrity="sha512-0JSLdMCGjtFivjqwnLASPcDjuajA4VSHkz19z+SPyOc/b808txD2DHZut3ipkY6Zj9ncYUjT+SHynWF3rmPISA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- 폰트어썸 불러오기 -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+
+        <!-- 사이트 공통 CSS -->
         <link rel="stylesheet" href="/resource/common.css" />
+        <!-- 사이트 공통 JS -->
+        <script src="/resource/common.js" defer="defer"></script>
     </head>
     <body>
-        <h1>${pageTitle}</h1>
-        <header>
-            <a href="/">로고</a>
-            <ul>
-                <li><a href="/">홈</a></li>
-                <li><a href="/usr/article/list">리스트</a></li>
-            </ul>
+        <header class="navbar">
+            <div class="flex-1">
+                <a href="/" class="btn btn-ghost nomal-case text-xl">로고</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal p-0">
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/usr/article/list">리스트</a></li>
+                </ul>
+            </div>
         </header>
         <hr />
-        <main>
+        <main class="container mx-auto mt-5">
+            <h1 class="text-3xl mb-5">${pageTitle}</h1>
+            
