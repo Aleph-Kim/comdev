@@ -4,23 +4,29 @@ prefix="c"%>
 <c:set var="pageTitle" value="게시물 리스트" />
 <%@ include file="../common/head.jsp" %>
 <div class="overflow-x-auto">
-    <table class="table w-full">
+    <table class="table w-full text-center border border-gray-500">
+        <colgroup>
+        <col width="50">
+        <col width="">
+        <col width="250">
+        <col width="150">
+        </colgroup>
         <thead>
             <tr>
-                <th>번호</th>
-                <th>날짜</th>
-                <th>제목</th>
+                <th class="border border-gray-500 !z-[-1]">번호</th>
+                <th class="border border-gray-500">제목</th>
+                <th class="border border-gray-500">날짜</th>
+                <th class="border border-gray-500">작성자</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="article" items="${articles}">
-                <a href="../article/detail?id=${article.id}.jsp">
-                    <tr class="hover">
-                        <td>${article.id}</td>
-                        <td>${article.regDate.substring(2, 10)}</td>
-                        <td>${article.title}</td>
-                    </tr>
-                </a>
+                <tr class="hover cursor-pointer" onclick="window.location.href='/usr/article/detail?id=${article.id}'">
+                    <td class="border border-gray-500 !z-[-1]">${article.id}</td>
+                    <td class="border border-gray-500 !z-[-1]">${article.title}</td>
+                    <td class="border border-gray-500 !z-[-1]">${article.regDate.substring(2, 10)}</td>
+                    <td class="border border-gray-500 !z-[-1]">${article.memberId}</td>
+                </tr>
             </c:forEach>
         </tbody>
     </table>
