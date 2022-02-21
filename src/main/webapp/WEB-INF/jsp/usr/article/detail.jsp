@@ -29,7 +29,7 @@ prefix="c"%>
                     </tr>
                     <tr>
                         <th>게시물 작성자</th>
-                        <td>${article.memberId}</td>
+                        <td>${article.extra__writerName}</td>
                     </tr>
                     <tr>
                         <th>게시물 제목</th>

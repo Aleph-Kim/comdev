@@ -12,11 +12,6 @@
         memberId = #{memberId}
     </insert>
 
-    <select id="getArticle" resultType="Article">
-        select * from article 
-        where id = #{id}
-    </select>
-
     <select id="getLastInsertId" resultType="int">
         SELECT LAST_INSERT_ID()
     </select>
