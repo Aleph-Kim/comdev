@@ -25,7 +25,7 @@ prefix="c"%>
                     <td class="border border-gray-500 !z-[-1]">${article.id}</td>
                     <td class="border border-gray-500 !z-[-1]">${article.title}</td>
                     <td class="border border-gray-500 !z-[-1]">${article.regDate.substring(2, 10)}</td>
-                    <td class="border border-gray-500 !z-[-1]">${article.memberId}</td>
+                    <td class="border border-gray-500 !z-[-1]">${article.extra__writerName}</td>
                 </tr>
             </c:forEach>
         </tbody>
