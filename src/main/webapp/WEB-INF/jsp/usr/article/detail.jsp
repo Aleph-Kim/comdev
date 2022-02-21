@@ -13,7 +13,7 @@ prefix="c"%>
             <table class="table w-full border border_table">
                 <colgroup>
                     <col width="200" />
-                </colgroup> 
+                </colgroup>
                 <tbody>
                     <tr>
                         <th>게시물 번호</th>
@@ -44,8 +44,17 @@ prefix="c"%>
         </div>
     </c:otherwise>
 </c:choose>
-<div class="relative">
-    <button class="btn mt-3 absolute right-0" onclick="history.back();">뒤로가기</button>
+<div class="flex flex-row-reverse mt-2">
+    <button class="btn" onclick="history.back();">뒤로가기</button>
+    <c:if test="${article.memberId == sessionScope.LoginedMemberId}">
+        <a
+            href="/usr/article/delete"
+            onclick="if (confirm('정말 삭제하시겠습니까?') == false) return false;"
+            class="btn mx-1"
+            >삭제</a
+        >
+        <a href="" class="btn">수정</a>
+    </c:if>
 </div>
 
 <%@ include file="../common/foot.jsp" %>
