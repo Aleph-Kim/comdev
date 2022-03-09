@@ -26,7 +26,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
@@ -41,7 +41,7 @@ public class UsrArticleController {
 		}
 
 		ResultData<Integer> writeArtilceRd = articleService.writeArticle(title, body,
-				memberId);
+				rq.getLoginedMemberId());
 
 		int id = writeArtilceRd.getData1();
 
@@ -52,7 +52,6 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
-		// ResultData.from("S-12", "게시물 목록입니다.", "articles",
 		List<Article> articles = articleService.getArticles();
 
 		model.addAttribute("articles", articles);
@@ -73,7 +72,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doDelete(HttpServletRequest req, int id) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
@@ -83,7 +82,7 @@ public class UsrArticleController {
 			return Ut.jsHistoryBack("게시물 번호를 입력해주세요.");
 		}
 
-		ResultData<Article> actorCanModify = articleService.actorCanModify(memberId, id);
+		ResultData<Article> actorCanModify = articleService.actorCanModify(rq.getLoginedMemberId(), id);
 		if (actorCanModify.isFail()) {
 			String msg = actorCanModify.getMsg();
 			return Ut.jsHistoryBack(msg);
@@ -97,7 +96,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
@@ -120,5 +119,4 @@ public class UsrArticleController {
 
 		return ResultData.from("F-3", Ut.f("%d번 게시물을 수정했습니다.", id), "article", article);
 	}
-	// 액션 메서드 끝
 }
