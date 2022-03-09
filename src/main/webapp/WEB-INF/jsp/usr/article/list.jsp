@@ -6,10 +6,10 @@ prefix="c"%>
 <div class="overflow-x-auto">
     <table class="table w-full text-center border border-gray-500">
         <colgroup>
-        <col width="50">
-        <col width="">
-        <col width="250">
-        <col width="150">
+            <col width="50" />
+            <col width="" />
+            <col width="250" />
+            <col width="150" />
         </colgroup>
         <thead>
             <tr>
@@ -21,11 +21,22 @@ prefix="c"%>
         </thead>
         <tbody>
             <c:forEach var="article" items="${articles}">
-                <tr class="hover cursor-pointer" onclick="window.location.href='/usr/article/detail?id=${article.id}'">
-                    <td class="border border-gray-500 !z-[-1]">${article.id}</td>
-                    <td class="border border-gray-500 !z-[-1]">${article.title}</td>
-                    <td class="border border-gray-500 !z-[-1]">${article.regDate.substring(2, 10)}</td>
-                    <td class="border border-gray-500 !z-[-1]">${article.extra__writerName}</td>
+                <tr
+                    class="hover cursor-pointer"
+                    onclick="window.location.href='/usr/article/detail?id=${article.id}'"
+                >
+                    <td class="border border-gray-500 !z-[-1]">
+                        ${article.id}
+                    </td>
+                    <td class="border border-gray-500 !z-[-1]">
+                        ${article.title}
+                    </td>
+                    <td class="border border-gray-500 !z-[-1]">
+                        ${article.regDate.substring(2, 10)}
+                    </td>
+                    <td class="border border-gray-500 !z-[-1]">
+                        ${article.extra__writerName}
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
