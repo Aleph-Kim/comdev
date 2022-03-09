@@ -2,12 +2,12 @@ package com.sbs.exam.demo.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import javax.servlet.http.HttpServletRequest;
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.ResultData;
+import com.sbs.exam.demo.vo.Rq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +19,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
-	private boolean isLogined = false;
 	private int memberId;
 
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(HttpSession httpSession, String title, String body) {
+	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 
-		if (httpSession.getAttribute("LoginedMemberId") != null) {
-			memberId = (int) httpSession.getAttribute("LoginedMemberId");
-			isLogined = true;
-		}
+		Rq rq = new Rq(req);
 
-		if (!isLogined) {
+		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
 		}
 
@@ -75,9 +71,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpSession httpSession, int id) {
+	public String doDelete(HttpServletRequest req, int id) {
 
-		if (!isLogined) {
+		Rq rq = new Rq(req);
+
+		if (!rq.isLogined()) {
 			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
 		}
 
@@ -97,13 +95,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify(HttpSession httpSession, int id, String title, String body) {
-		if (httpSession.getAttribute("LoginedMemberId") != null) {
-			memberId = (int) httpSession.getAttribute("LoginedMemberId");
-			isLogined = true;
-		}
+	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 
-		if (!isLogined) {
+		Rq rq = new Rq(req);
+
+		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
 		}
 
