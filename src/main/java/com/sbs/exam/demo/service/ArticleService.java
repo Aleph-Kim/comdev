@@ -39,7 +39,10 @@ public class ArticleService {
 		articleRepository.modifyArticle(id, title, body);
 	}
 
-	public ResultData<Article> actorCanModify(int actorId, Article article) {
+	public ResultData<Article> actorCanModify(int actorId, int id) {
+
+		Article article = getArticle(id);
+
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
 		}

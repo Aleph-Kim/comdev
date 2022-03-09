@@ -77,11 +77,6 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doDelete(HttpSession httpSession, int id) {
 
-		if (httpSession.getAttribute("LoginedMemberId") != null) {
-			memberId = (int) httpSession.getAttribute("LoginedMemberId");
-			isLogined = true;
-		}
-
 		if (!isLogined) {
 			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
 		}
@@ -90,6 +85,11 @@ public class UsrArticleController {
 			return Ut.jsHistoryBack("게시물 번호를 입력해주세요.");
 		}
 
+		ResultData<Article> actorCanModify = articleService.actorCanModify(memberId, id);
+		if (actorCanModify.isFail()) {
+			String msg = actorCanModify.getMsg();
+			return Ut.jsHistoryBack(msg);
+		}
 		articleService.deleteArticle(id);
 
 		return Ut.jsReplace(Ut.f("%d번 게시물을 삭제 했습니다.", id), "../article/list");
@@ -113,7 +113,7 @@ public class UsrArticleController {
 
 		Article article = articleService.getArticle(id);
 
-		ResultData<Article> actorCanModify = articleService.actorCanModify(memberId, article);
+		ResultData<Article> actorCanModify = articleService.actorCanModify(memberId, id);
 		if (actorCanModify.isFail()) {
 			return actorCanModify;
 		}
