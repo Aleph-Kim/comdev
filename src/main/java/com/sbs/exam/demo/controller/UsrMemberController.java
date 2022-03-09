@@ -9,6 +9,7 @@ import com.sbs.exam.demo.vo.ResultData;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,6 +44,11 @@ public class UsrMemberController {
             return joinRd;
         }
         return ResultData.newData(joinRd, member);
+    }
+
+    @RequestMapping("/usr/member/login")
+    public String showLogin(HttpSession httpSession) {
+        return "/usr/member/login";
     }
 
     @RequestMapping("/usr/member/doLogin")

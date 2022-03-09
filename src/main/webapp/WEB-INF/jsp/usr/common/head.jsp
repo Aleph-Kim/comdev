@@ -39,6 +39,7 @@
                     <ul class="menu menu-horizontal p-0">
                         <li><a href="/">홈</a></li>
                         <li><a href="/usr/article/list">리스트</a></li>
+                        <li><a href="/usr/member/login">로그인</a></li>
                     </ul>
                 </div>
             </header>
