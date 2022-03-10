@@ -1,6 +1,5 @@
 package com.sbs.exam.demo.controller;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -92,6 +91,7 @@ public class UsrMemberController {
         if (!rq.isLogined()) {
             return Ut.jsHistoryBack("로그인 후 이용해주세요.");
         }
+
         rq.logout();
 
         return Ut.jsReplace("정상적으로 로그아웃 되었습니다.", "../member/login");

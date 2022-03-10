@@ -31,6 +31,16 @@ public class ArticleService {
 		return articleRepository.getArticle(id);
 	}
 
+	public Article getForPrintArticle(int actorId, int id) {
+		Article article = articleRepository.getArticle(id);
+
+		if (article.getMemberId() != actorId) {
+			return null;
+		}
+
+		return article;
+	}
+
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
 	}

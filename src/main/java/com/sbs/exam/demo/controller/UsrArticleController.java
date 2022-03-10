@@ -3,6 +3,7 @@ package com.sbs.exam.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
-	private int memberId;
 
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
@@ -85,26 +85,26 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/doModify")
-	@ResponseBody
-	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
+	public String modify(HttpServletRequest req, int id, String title, String body) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.empty(id)) {
-			return ResultData.from("F-1", "게시물 번호를 입력해주세요.");
+			return Ut.jsHistoryBack("게시물 번호를 입력해주세요.");
 		}
 
 		Article article = articleService.getArticle(id);
 
-		ResultData<Article> actorCanModify = articleService.actorCanModify(memberId, id);
-		if (actorCanModify.isFail()) {
-			return actorCanModify;
+		if (article == null) {
+			return rq.jsHistoryBackOnView(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
-		articleService.modifyArticle(id, title, body);
+		ResultData<Article> actorCanModify = articleService.actorCanModify(rq.getLoginedMemberId(), id);
+		if (actorCanModify.isFail()) {
+			String msg = actorCanModify.getMsg();
+			return rq.jsHistoryBackOnView(msg);
+		}
 
-		article = articleService.getArticle(id);
-
-		return ResultData.from("F-3", Ut.f("%d번 게시물을 수정했습니다.", id), "article", article);
+		return "/usr/article/modify";
 	}
 }

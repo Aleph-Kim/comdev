@@ -25,8 +25,8 @@ public class Rq {
     public Rq(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
         this.resp = resp;
+        this.httpSession = this.req.getSession();
 
-        this.httpSession = req.getSession();
         boolean isLogined = false;
         int loginedMemberId = 0;
 
@@ -42,19 +42,8 @@ public class Rq {
     public void printHistoryBackJs(String msg) {
         resp.setContentType("text/html; charset=UTF-8");
 
-        println("<script>");
+        print(Ut.jsHistoryBack(msg));
 
-        if (!Ut.empty(msg)) {
-            println("alert('" + msg + "');");
-        }
-
-        println("history.back();");
-
-        println("</script>");
-    }
-
-    private void println(String str) {
-        print(str + "\n");
     }
 
     private void print(String str) {
@@ -71,6 +60,12 @@ public class Rq {
 
     public void logout() {
         httpSession.removeAttribute("LoginedMemberId");
+    }
+
+    public String jsHistoryBackOnView(String msg) {
+        req.setAttribute("msg", msg);
+        req.setAttribute("historyBack", true);
+        return "common/js";
     }
 
 }
