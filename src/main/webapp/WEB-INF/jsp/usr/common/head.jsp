@@ -30,7 +30,7 @@
             <script src="/resource/common.js" defer="defer"></script>
         </head>
 
-        <body>
+        <body class="min-w-[500px]">
             <header class="navbar">
                 <div class="flex-1">
                     <a href="/" class="btn btn-ghost nomal-case text-xl">로고</a>
@@ -49,5 +49,5 @@
                 </div>
             </header>
             <hr />
-            <main class="container mx-auto px-5 mt-5">
+            <main class="container mx-auto px-5 mt-5 pb-[5rem]">
                 <h1 class="text-3xl mb-5">${pageTitle}</h1>

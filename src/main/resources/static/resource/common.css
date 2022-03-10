@@ -29,7 +29,8 @@ html > body {
     font-family: "LotteMartDream", sans-serif;
 }
 
-.border_table tr, .border_table td {
-    border: 1px solid white;
-    padding: 10px;
+.border_table tr,
+.border_table td {
+    border: 1px solid white !important;
+    padding: 10px !important;
 }
