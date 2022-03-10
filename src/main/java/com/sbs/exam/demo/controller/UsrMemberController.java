@@ -1,11 +1,14 @@
 package com.sbs.exam.demo.controller;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
+import com.sbs.exam.demo.vo.Rq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,9 +57,10 @@ public class UsrMemberController {
 
     @RequestMapping("/usr/member/doLogin")
     @ResponseBody
-    public String doLogin(HttpSession httpSession, String loginId, String loginPw) {
+    public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
 
-        if (httpSession.getAttribute("LoginedMemberId") != null) {
+        Rq rq = (Rq) req.getAttribute("rq");
+        if (rq.isLogined()) {
             return Ut.jsHistoryBack("이미 로그인 되어있습니다.");
         }
         if (Ut.empty(loginId)) {
@@ -74,17 +78,22 @@ public class UsrMemberController {
         if (member.getLoginPw().equals(loginPw) == false) {
             return Ut.jsHistoryBack("잘못된 비밀번호 입니다.");
         }
-        httpSession.setAttribute("LoginedMemberId", member.getId());
-        return Ut.jsReplace(Ut.f("환영합니다 %s님", member.getNickname()), "/");
+
+        rq.login(member);
+
+        return Ut.jsReplace(Ut.f("환영합니다 <%s>님", member.getNickname()), "/");
     }
 
     @RequestMapping("/usr/member/doLogout")
     @ResponseBody
-    public String doLogout(HttpSession httpSession) {
-        if (httpSession.getAttribute("LoginedMemberId") == null) {
+    public String doLogout(HttpServletRequest req) {
+        Rq rq = (Rq) req.getAttribute("rq");
+
+        if (!rq.isLogined()) {
             return Ut.jsHistoryBack("로그인 후 이용해주세요.");
         }
-        httpSession.removeAttribute("LoginedMemberId");
+        rq.logout();
+
         return Ut.jsReplace("정상적으로 로그아웃 되었습니다.", "../member/login");
     }
 }
