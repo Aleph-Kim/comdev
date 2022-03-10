@@ -5,7 +5,7 @@
             <div class="overflow-x-auto">
                 <form action="../member/doLogin" method="post">
                     <input class="text-black" type="text" name="loginId" placeholder="아이디">
-                    <input class="text-black" type="text" name="loginPw" placeholder="비밀번호">
+                    <input class="text-black" type="password" name="loginPw" placeholder="비밀번호">
                     <button onclick="submit" class="btn">로그인</button>
                     <button class="btn" onclick="history.back();">뒤로가기</button>
                 </form>
