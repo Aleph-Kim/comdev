@@ -117,7 +117,7 @@ SET boardId = 2
 WHERE id = 2;
 
 UPDATE article
-SET boardId = 3
+SET boardId = 2
 WHERE id = 3;
 
 SELECT *

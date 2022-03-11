@@ -38,4 +38,15 @@ public interface ArticleRepository {
 	public List<Article> getArticles();
 
 	public int getLastInsertId();
+
+	@Select("""
+				SELECT A.*,
+				M.nickname AS extra__writerName
+				FROM article AS A
+				LEFT JOIN member AS M
+				ON A.memberId = M.id
+				WHERE boardId = #{boardId}
+				ORDER BY A.id DESC
+			""")
+	public List<Article> getArticlesInBoard(@Param("boardId") int boardId);
 }

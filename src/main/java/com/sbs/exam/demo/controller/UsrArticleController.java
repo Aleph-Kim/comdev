@@ -42,11 +42,11 @@ public class UsrArticleController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.empty(title)) {
-			return Ut.jsHistoryBack("제목을 입력해주세요.");
+			return rq.jsHistoryBack("제목을 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return Ut.jsHistoryBack("내용을 입력해주세요.");
+			return rq.jsHistoryBack("내용을 입력해주세요.");
 		}
 
 		ResultData<Integer> writeArtilceRd = articleService.writeArticle(title, body,
@@ -58,13 +58,21 @@ public class UsrArticleController {
 
 		ResultData.newData(writeArtilceRd, article);
 
-		return Ut.jsReplace("게시물이 저장 되었습니다.", Ut.f("../article/detail?id=%d", article.getId()));
+		return rq.jsReplace("게시물이 저장 되었습니다.", Ut.f("../article/detail?id=%d", article.getId()));
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, int boardId) {
-		List<Article> articles = articleService.getArticles();
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+		Rq rq = (Rq) req.getAttribute("rq");
+
 		Board board = boardService.getBoard(boardId);
+		List<Article> articles;
+
+		if (board == null) {
+			return rq.jsHistoryBackOnView("존재하지 않는 게시판입니다.");
+		}
+
+		articles = articleService.getArticlesInBoard(boardId);
 
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
@@ -100,11 +108,11 @@ public class UsrArticleController {
 		ResultData<Article> actorCanModify = articleService.actorCanModify(rq.getLoginedMemberId(), id);
 		if (actorCanModify.isFail()) {
 			String msg = actorCanModify.getMsg();
-			return Ut.jsHistoryBack(msg);
+			return rq.jsHistoryBack(msg);
 		}
 		articleService.deleteArticle(id);
 
-		return Ut.jsReplace(Ut.f("%d번 게시물을 삭제 했습니다.", id), "../article/list");
+		return rq.jsReplace(Ut.f("%d번 게시물을 삭제 했습니다.", id), "../article/list");
 	}
 
 	@RequestMapping("/usr/article/modify")
@@ -136,8 +144,10 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doModify(HttpServletRequest req, int id, String title, String body) {
 
+		Rq rq = (Rq) req.getAttribute("Rq");
+
 		articleService.modifyArticle(id, title, body);
 
-		return Ut.jsReplace("수정되었습니다.", Ut.f("../article/detail?id=%d", id));
+		return rq.jsReplace("수정되었습니다.", Ut.f("../article/detail?id=%d", id));
 	}
 }

@@ -61,4 +61,8 @@ public class ArticleService {
 		}
 		return ResultData.from("S-1", "접근이 가능합니다.");
 	}
+
+	public List<Article> getArticlesInBoard(int boardId) {
+		return articleRepository.getArticlesInBoard(boardId);
+	}
 }
