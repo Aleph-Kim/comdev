@@ -41,6 +41,10 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doAdd(String title, String body, int boardId) {
 
+		if (Ut.empty(boardId)) {
+			return rq.jsHistoryBack("게시판을 선택해주세요.");
+		}
+
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("제목을 입력해주세요.");
 		}

@@ -19,7 +19,7 @@
                                 <th>게시판 선택</th>
                                 <td class="!p-0">
                                     <select class="select select-bordered w-full max-w-xs bg-gray-700" name="boardId">
-                                        <option disabled selected>게시판을 선택해주세요</option>
+                                        <option readonly selected value="-1">-------- 게시판을 선택해주세요 --------</option>
                                         <option value="1">공지사항</option>
                                         <option value="2">자유게시판</option>
                                     </select>
@@ -28,15 +28,15 @@
                             <tr>
                                 <th>게시물 제목</th>
                                 <td class="!p-0">
-                                    <input type="text" value="${article.title}" name="title" placeholder="제목"
-                                        class="text-black text-lg w-full h-[3.5rem]" />
+                                    <input required="required" type="text" value="${article.title}" name="title"
+                                        placeholder="제목" class="text-black text-lg w-full h-[3.5rem]" />
                                 </td>
                             </tr>
                             <tr>
                                 <th>게시물 내용</th>
                                 <td class="!p-0">
-                                    <input type="text" value="${article.body}" rows="10" name="body" placeholder="내용"
-                                        class="text-black text-lg w-full min-h-[10rem]" />
+                                    <input required="required" type="text" value="${article.body}" rows="10" name="body"
+                                        placeholder="내용" class="text-black text-lg w-full min-h-[10rem]" />
                                 </td>
                             </tr>
                         </tbody>
