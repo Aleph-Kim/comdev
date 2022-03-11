@@ -14,6 +14,10 @@
                             <td>${article.id}</td>
                         </tr>
                         <tr>
+                            <th>게시판 이름</th>
+                            <td>${board.name}</td>
+                        </tr>
+                        <tr>
                             <th>작성날짜</th>
                             <td>${article.regDate.substring(0, 16)}</td>
                         </tr>

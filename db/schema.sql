@@ -104,7 +104,7 @@ INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free1',
-`name` = '자유';
+`name` = '자유게시판';
 
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
 
@@ -119,6 +119,13 @@ WHERE id = 2;
 UPDATE article
 SET boardId = 2
 WHERE id = 3;
+
+INSERT INTO article 
+(
+	regDate, updateDate, memberId, boardId, title, `body`
+)
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('제목 ', RAND()), CONCAT('내용 ', RAND())
+FROM article;
 
 SELECT *
 FROM article;
