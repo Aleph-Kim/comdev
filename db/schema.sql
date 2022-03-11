@@ -85,6 +85,46 @@ UPDATE article
 SET memberId = 2
 WHERE memberId = 0;
 
-SELECT *
-FROM article
 
+CREATE TABLE board (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `code` CHAR(100) NOT NULL UNIQUE COMMENT 'notice(공지사항), free1(자유게시판1), free2(자유게시판2)',
+    `name` CHAR(100) NOT NULL UNIQUE COMMENT '게시판 이름'
+);
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'notice',
+`name` = '공지사항';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'free2',
+`name` = '자유게시판2';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'free1',
+`name` = '자유게시판1';
+
+ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
+
+UPDATE article
+SET boardId = 1
+WHERE id = 1;
+
+UPDATE article
+SET boardId = 2
+WHERE id = 2;
+
+UPDATE article
+SET boardId = 3
+WHERE id = 3;
+
+SELECT *
+FROM article;

@@ -38,12 +38,12 @@
             </div>
             <div class="flex flex-row-reverse mt-2">
                 <button class="btn" onclick="history.back();">뒤로가기</button>
-                <c:if test="${article.memberId == sessionScope.LoginedMemberId}">
+                <c:if test="${article.memberId == sessionScope.LoginedMember.id}">
                     <a onclick="if (confirm('정말 삭제하시겠습니까?') == false);" href="/usr/article/doDelete?id=${article.id}"
-                        class="btn mx-1">
+                        class="btn mx-2">
                         삭제
                     </a>
-                    <a href="/usr/article/modify?id=${article.id}" class="btn mx-1">수정</a>
+                    <a href="/usr/article/modify?id=${article.id}" class="btn">수정</a>
                 </c:if>
             </div>
 

@@ -40,6 +40,7 @@
                         <li><a href="/">홈</a></li>
                         <li><a href="/usr/article/list">리스트</a></li>
                         <c:if test="${rq.isLogined()}">
+                            <li><a href="/usr/article/Add">글 작성</a></li>
                             <li><a href="/usr/member/doLogout">로그아웃</a></li>
                         </c:if>
                         <c:if test="${rq.isLogined() == false}">

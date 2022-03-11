@@ -56,10 +56,12 @@ public class Rq {
 
     public void login(Member member) {
         httpSession.setAttribute("LoginedMemberId", member.getId());
+        httpSession.setAttribute("LoginedMember", member);
     }
 
     public void logout() {
         httpSession.removeAttribute("LoginedMemberId");
+        httpSession.removeAttribute("LoginedMember");
     }
 
     public String jsHistoryBackOnView(String msg) {
