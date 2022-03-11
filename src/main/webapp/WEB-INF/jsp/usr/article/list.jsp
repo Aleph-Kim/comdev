@@ -2,7 +2,7 @@
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="${board.name}" />
         <%@ include file="../common/head.jsp" %>
-            <div>게시물 개수 : ( ${articles.size()} )</div>
+            <div>총 게시물 개수 : ( ${articlesCount} )</div>
             <div class="overflow-x-auto">
                 <table class="table w-full text-center border border-gray-500">
                     <colgroup>
@@ -39,5 +39,13 @@
                         </c:forEach>
                     </tbody>
                 </table>
+            </div>
+            <div class="page-menu mt-5">
+                <div class="btn-group justify-center">
+                    <c:forEach var="i" begin="1" end="20">
+                        <a class="btn ${param.page == i ? 'btn-active' : '' }"
+                            href="?boardId=${param.boardId}&page=${i}">${i}</a>
+                    </c:forEach>
+                </div>
             </div>
             <%@ include file="../common/foot.jsp" %>

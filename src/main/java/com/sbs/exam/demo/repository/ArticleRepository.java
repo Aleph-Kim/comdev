@@ -45,4 +45,11 @@ public interface ArticleRepository {
 			""")
 	public List<Article> getArticles(@Param("boardId") int boardId, int limitStart,
 			int limitTake);
+
+	@Select("""
+			SELECT COUNT(*)
+			FROM article AS A
+			WHERE A.boardId = #{boardId}
+			""")
+	public int getArticlesCount(@Param("boardId") int boardId);
 }

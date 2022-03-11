@@ -82,7 +82,10 @@ public class UsrArticleController {
 			return rq.jsHistoryBackOnView("존재하지 않는 페이지입니다.");
 		}
 
+		int articlesCount = articleService.getArticlesCount(board);
+
 		model.addAttribute("articles", articles);
+		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("board", board);
 
 		return "/usr/article/list";

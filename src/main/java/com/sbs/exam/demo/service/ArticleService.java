@@ -5,6 +5,7 @@ import java.util.List;
 import com.sbs.exam.demo.repository.ArticleRepository;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.Article;
+import com.sbs.exam.demo.vo.Board;
 import com.sbs.exam.demo.vo.ResultData;
 
 import org.springframework.stereotype.Service;
@@ -64,5 +65,9 @@ public class ArticleService {
 		int limitTake = itemsCountInPage;
 
 		return articleRepository.getArticles(boardId, limitStart, limitTake);
+	}
+
+	public int getArticlesCount(Board board) {
+		return articleRepository.getArticlesCount(board.getId());
 	}
 }
