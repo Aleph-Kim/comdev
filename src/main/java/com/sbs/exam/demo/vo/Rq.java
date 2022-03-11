@@ -28,10 +28,11 @@ public class Rq {
     private HttpServletResponse resp;
     private HttpSession httpSession;
 
-    public Rq(HttpServletRequest req, HttpServletResponse resp) {
+    public Rq(HttpServletRequest req, HttpServletResponse resp, Rq rq) {
         this.req = req;
         this.resp = resp;
         this.httpSession = this.req.getSession();
+        this.req.setAttribute("rq", this);
 
         boolean isLogined = false;
         int loginedMemberId = 0;
@@ -82,6 +83,10 @@ public class Rq {
 
     public String jsReplace(String msg, String uri) {
         return Ut.jsReplace(msg, uri);
+    }
+
+    // Rq 객체가 자연스럽게 생성되도록 유도하는 역할
+    public void initOnBeforeActionInterceptor() {
     }
 
 }

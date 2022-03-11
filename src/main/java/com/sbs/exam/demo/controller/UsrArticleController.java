@@ -66,7 +66,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, int boardId) {
+	public String showList(Model model, int boardId, int page) {
 		Board board = boardService.getBoard(boardId);
 		List<Article> articles;
 
@@ -74,7 +74,13 @@ public class UsrArticleController {
 			return rq.jsHistoryBackOnView("존재하지 않는 게시판입니다.");
 		}
 
-		articles = articleService.getArticlesInBoard(boardId);
+		int itemsCountInPage = 10;
+
+		articles = articleService.getArticles(boardId, itemsCountInPage, page);
+
+		if (articles.size() == 0) {
+			return rq.jsHistoryBackOnView("존재하지 않는 페이지입니다.");
+		}
 
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);

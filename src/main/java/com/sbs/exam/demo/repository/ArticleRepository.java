@@ -27,26 +27,22 @@ public interface ArticleRepository {
 
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
 
-	@Select("""
-				SELECT A.*,
-				M.nickname AS extra__writerName
-				FROM article AS A
-				LEFT JOIN member AS M
-				ON A.memberId = M.id
-				ORDER BY A.id DESC
-			""")
-	public List<Article> getArticles();
-
 	public int getLastInsertId();
 
 	@Select("""
-				SELECT A.*,
-				M.nickname AS extra__writerName
-				FROM article AS A
-				LEFT JOIN member AS M
-				ON A.memberId = M.id
-				WHERE boardId = #{boardId}
-				ORDER BY A.id DESC
+				<script>
+					SELECT A.*,
+					M.nickname AS extra__writerName
+					FROM article AS A
+					LEFT JOIN member AS M
+					ON A.memberId = M.id
+					WHERE boardId = #{boardId}
+					ORDER BY A.id DESC
+					<if test="limitTake > -1">
+						LIMIT #{limitStart}, #{limitTake}
+					</if>
+				</script>
 			""")
-	public List<Article> getArticlesInBoard(@Param("boardId") int boardId);
+	public List<Article> getArticles(@Param("boardId") int boardId, int limitStart,
+			int limitTake);
 }

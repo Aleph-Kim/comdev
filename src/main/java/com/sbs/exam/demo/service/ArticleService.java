@@ -23,10 +23,6 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getArticles() {
-		return articleRepository.getArticles();
-	}
-
 	public Article getArticle(int id) {
 		return articleRepository.getArticle(id);
 	}
@@ -62,7 +58,11 @@ public class ArticleService {
 		return ResultData.from("S-1", "접근이 가능합니다.");
 	}
 
-	public List<Article> getArticlesInBoard(int boardId) {
-		return articleRepository.getArticlesInBoard(boardId);
+	public List<Article> getArticles(int boardId, int itemsCountInPage, int page) {
+
+		int limitStart = (page - 1) * itemsCountInPage;
+		int limitTake = itemsCountInPage;
+
+		return articleRepository.getArticles(boardId, limitStart, limitTake);
 	}
 }
