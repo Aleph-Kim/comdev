@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ArticleRepository {
 	public void writeArticle(@Param("title") String title, @Param("body") String body,
-			@Param("memberId") int memberId);
+			@Param("memberId") int memberId, @Param("boardId") int boardId);
 
 	@Select("""
 				select A.*,

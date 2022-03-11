@@ -2,6 +2,7 @@
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
         <%@ include file="../common/head.jsp" %>
+            <div>게시물 개수 : ( ${articles.size()} )</div>
             <div class="overflow-x-auto">
                 <table class="table w-full text-center border border-gray-500">
                     <colgroup>

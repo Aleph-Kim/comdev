@@ -16,6 +16,16 @@
                                 <td>${sessionScope.LoginedMember.nickname}</td>
                             </tr>
                             <tr>
+                                <th>게시판 선택</th>
+                                <td class="!p-0">
+                                    <select class="select select-bordered w-full max-w-xs bg-gray-700" name="boardId">
+                                        <option disabled selected>게시판을 선택해주세요</option>
+                                        <option value="1">공지사항</option>
+                                        <option value="2">자유게시판</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>게시물 제목</th>
                                 <td class="!p-0">
                                     <input type="text" value="${article.title}" name="title" placeholder="제목"

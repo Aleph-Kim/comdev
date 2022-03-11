@@ -22,10 +22,12 @@ public class UsrArticleController {
 
 	private ArticleService articleService;
 	private BoardService boardService;
+	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.rq = rq;
 	}
 
 	// 액션 메서드 시작
@@ -37,9 +39,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public String doAdd(HttpServletRequest req, String title, String body) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doAdd(String title, String body, int boardId) {
 
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("제목을 입력해주세요.");
@@ -50,7 +50,7 @@ public class UsrArticleController {
 		}
 
 		ResultData<Integer> writeArtilceRd = articleService.writeArticle(title, body,
-				rq.getLoginedMemberId());
+				rq.getLoginedMemberId(), boardId);
 
 		int id = writeArtilceRd.getData1();
 
@@ -62,9 +62,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(HttpServletRequest req, Model model, int boardId) {
-		Rq rq = (Rq) req.getAttribute("rq");
-
+	public String showList(Model model, int boardId) {
 		Board board = boardService.getBoard(boardId);
 		List<Article> articles;
 
@@ -81,8 +79,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, int id, HttpServletRequest req) {
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String showDetail(Model model, int id) {
 
 		Article article = articleService.getArticle(id);
 
@@ -97,10 +94,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(HttpServletRequest req, int id) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-
+	public String doDelete(int id) {
 		if (Ut.empty(id)) {
 			return Ut.jsHistoryBack("게시물 번호를 입력해주세요.");
 		}
@@ -116,10 +110,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	public String showModify(HttpServletRequest req, Model model, int id) {
-
-		Rq rq = (Rq) req.getAttribute("rq");
-
+	public String showModify(Model model, int id) {
 		if (Ut.empty(id)) {
 			return Ut.jsHistoryBack("게시물 번호를 입력해주세요.");
 		}
@@ -142,10 +133,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int id, String title, String body) {
-
-		Rq rq = (Rq) req.getAttribute("Rq");
-
+	public String doModify(int id, String title, String body) {
 		articleService.modifyArticle(id, title, body);
 
 		return rq.jsReplace("수정되었습니다.", Ut.f("../article/detail?id=%d", id));
