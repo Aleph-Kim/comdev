@@ -38,7 +38,8 @@
                 <div class="flex-none">
                     <ul class="menu menu-horizontal p-0">
                         <li><a href="/">홈</a></li>
-                        <li><a href="/usr/article/list">리스트</a></li>
+                        <li><a href="/usr/article/list?boardId=1">공지사항</a></li>
+                        <li><a href="/usr/article/list?boardId=2">자유게시판</a></li>
                         <c:if test="${rq.isLogined()}">
                             <li><a href="/usr/article/Add">글 작성</a></li>
                             <li><a href="/usr/member/doLogout">로그아웃</a></li>

@@ -103,14 +103,8 @@ updateDate = NOW(),
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'free2',
-`name` = '자유게시판2';
-
-INSERT INTO board
-SET regDate = NOW(),
-updateDate = NOW(),
 `code` = 'free1',
-`name` = '자유게시판1';
+`name` = '자유';
 
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
 
