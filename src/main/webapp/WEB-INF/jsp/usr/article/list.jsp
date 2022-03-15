@@ -5,8 +5,7 @@
             <div class="flex justify-between">
                 <div class="flex items-center">총 게시물 개수 : ( ${articlesCount} )</div>
                 <div class="form-control mb-3">
-                    <form
-                        action="/usr/article/list?searchKeyword=${searchKeyword}&searchKeywordType=${searchKeywordType}">
+                    <form action="/usr/article/list">
                         <div class="input-group">
                             <select class="select select-bordered" name="searchKeywordType">
                                 <option selected value="titlebody">제목 + 내용</option>
@@ -15,6 +14,7 @@
                             </select>
                             <input type="text" name="searchKeyword" value="${param.searchKeyword}"
                                 class="bg-base-200 text-black">
+                            <input type="hidden" name="boardId" value="${param.boardId}">
                             <button class="btn">검색</button>
                         </div>
                     </form>

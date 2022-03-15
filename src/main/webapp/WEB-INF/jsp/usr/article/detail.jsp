@@ -2,7 +2,7 @@
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="게시물 상세페이지" />
 
-        <%@ include file="../common/head.jsp" %>
+        <%@ include file="../common/head.jspf" %>
             <div class="overflow-y-auto">
                 <table class="table w-full border border_table">
                     <colgroup>
@@ -51,4 +51,4 @@
                 </c:if>
             </div>
 
-            <%@ include file="../common/foot.jsp" %>
+            <%@ include file="../common/foot.jspf" %>

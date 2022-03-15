@@ -88,7 +88,7 @@ public class UsrArticleController {
 		}
 
 		int articlesCount = articleService.getArticlesCount(board, searchKeyword, searchKeywordType);
-		int pageCount = (articlesCount + 1) / 10;
+		int pageCount = (int) Math.ceil((double) articlesCount / 10.0);
 
 		model.addAttribute("page", page);
 		model.addAttribute("articles", articles);
