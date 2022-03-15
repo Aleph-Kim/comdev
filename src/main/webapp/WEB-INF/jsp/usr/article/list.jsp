@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="${board.name}" />
-        <%@ include file="../common/head.jsp" %>
+        <%@ include file="../common/head.jspf" %>
             <div>총 게시물 개수 : ( ${articlesCount} )</div>
             <div class="overflow-x-auto">
                 <table class="table w-full text-center border border-gray-500">
@@ -42,10 +42,26 @@
             </div>
             <div class="page-menu mt-5">
                 <div class="btn-group justify-center">
-                    <c:forEach var="i" begin="1" end="20">
-                        <a class="btn ${param.page == i ? 'btn-active' : '' }"
-                            href="?boardId=${param.boardId}&page=${i}">${i}</a>
+                    <c:set var="pageMenuArmLen" value="4" />
+                    <c:set var="pageStart" value="${page - pageMenuArmLen <= 0 ? 1 : page - pageMenuArmLen }" />
+                    <c:set var="pageEnd"
+                        value="${pageCount < (page + pageMenuArmLen) ? pageCount : (page + pageMenuArmLen) }" />
+
+                    <c:if test="${pageStart != 1}">
+                        <a class="btn " href="?boardId=${board.id}&page=1">첫 페이지</a>
+                        <c:if test="${page - pageMenuArmLen > 2}">
+                            <button class="btn">...</button>
+                        </c:if>
+                    </c:if>
+                    <c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
+                        <a class="btn ${page == i ? 'btn-active' : '' }" href="?boardId=${board.id}&page=${i}">${i}</a>
                     </c:forEach>
+                    <c:if test="${page + pageMenuArmLen < pageCount - 1}">
+                        <button class="btn pageStartMore">...</button>
+                    </c:if>
+                    <c:if test="${pageEnd != pageCount}">
+                        <a class="btn" href="?boardId=${board.id}&page=${pageCount}">끝 페이지</a>
+                    </c:if>
                 </div>
             </div>
-            <%@ include file="../common/foot.jsp" %>
+            <%@ include file="../common/foot.jspf" %>
