@@ -3,6 +3,33 @@
         <c:set var="pageTitle" value="게시물 상세페이지" />
 
         <%@ include file="../common/head.jspf" %>
+
+            <script>
+                const params = {};
+                params.id = parseInt('${ param.id }');
+
+                function ArticleDetail__increaseHitCount() {
+                    $.get('../article/doIncreaseHitCount', {
+                        id: params.id,
+                        ajaxMode: 'Y'
+                    }, function (data) {
+                        $('.article-detail__hit-count').empty().html(data.data1);
+                    }, 'json');
+                }
+
+                $(function () {
+                    const localStorageKey = 'article__' + params.id + '__viewDone';
+
+                    if (localStorage.getItem(localStorageKey)) {
+                        return;
+                    }
+
+                    localStorage.setItem(localStorageKey, true);
+
+                    ArticleDetail__increaseHitCount();
+                })
+            </script>
+
             <div class="overflow-y-auto">
                 <table class="table w-full border border_table">
                     <colgroup>
@@ -31,7 +58,9 @@
                         </tr>
                         <tr>
                             <th>조회수</th>
-                            <td>${article.hitCount}</td>
+                            <div class="article-detail__hit-count">
+                                <td>${article.hitCount}</td>
+                            </div>
                         </tr>
                         <tr>
                             <th>제목</th>

@@ -108,14 +108,19 @@ public class UsrArticleController {
 			return rq.jsHistoryBackOnView(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
-		articleService.increaseHitCount(id);
-
 		Board board = boardService.getBoard(article.getBoardId());
 
 		model.addAttribute("article", article);
 		model.addAttribute("board", board);
 
 		return "/usr/article/detail";
+	}
+
+	@RequestMapping("/usr/article/doIncreaseHitCount")
+	@ResponseBody
+	public String doincreaseHitcount(int id) {
+		articleService.increaseHitCount(id);
+		return "증가완료";
 	}
 
 	@RequestMapping("/usr/article/doDelete")
