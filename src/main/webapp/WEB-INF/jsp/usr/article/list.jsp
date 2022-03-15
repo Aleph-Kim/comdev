@@ -2,7 +2,24 @@
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="${board.name}" />
         <%@ include file="../common/head.jspf" %>
-            <div>총 게시물 개수 : ( ${articlesCount} )</div>
+            <div class="flex justify-between">
+                <div class="flex items-center">총 게시물 개수 : ( ${articlesCount} )</div>
+                <div class="form-control mb-3">
+                    <form
+                        action="/usr/article/list?searchKeyword=${searchKeyword}&searchKeywordType=${searchKeywordType}">
+                        <div class="input-group">
+                            <select class="select select-bordered" name="searchKeywordType">
+                                <option selected value="titlebody">제목 + 내용</option>
+                                <option value="title">제목</option>
+                                <option value="body">내용</option>
+                            </select>
+                            <input type="text" name="searchKeyword" value="${param.searchKeyword}"
+                                class="bg-base-200 text-black">
+                            <button class="btn">검색</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="overflow-x-auto">
                 <table class="table w-full text-center border border-gray-500">
                     <colgroup>
@@ -47,20 +64,23 @@
                     <c:set var="pageEnd"
                         value="${pageCount < (page + pageMenuArmLen) ? pageCount : (page + pageMenuArmLen) }" />
 
+                    <c:set var="pageBaseUri"
+                        value="?boardId=${board.id}&searchKeyword=${param.searchKeyword}&searchKeywordType=${param.searchKeywordType}" />
+
                     <c:if test="${pageStart != 1}">
-                        <a class="btn " href="?boardId=${board.id}&page=1">첫 페이지</a>
+                        <a class="btn " href="${pageBaseUri}&page=1">첫 페이지</a>
                         <c:if test="${page - pageMenuArmLen > 2}">
                             <button class="btn">...</button>
                         </c:if>
                     </c:if>
                     <c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
-                        <a class="btn ${page == i ? 'btn-active' : '' }" href="?boardId=${board.id}&page=${i}">${i}</a>
+                        <a class="btn ${page == i ? 'btn-active' : '' }" href="${pageBaseUri}&page=${i}">${i}</a>
                     </c:forEach>
                     <c:if test="${page + pageMenuArmLen < pageCount - 1}">
                         <button class="btn pageStartMore">...</button>
                     </c:if>
                     <c:if test="${pageEnd != pageCount}">
-                        <a class="btn" href="?boardId=${board.id}&page=${pageCount}">끝 페이지</a>
+                        <a class="btn" href="${pageBaseUri}&page=${pageCount}">끝 페이지</a>
                     </c:if>
                 </div>
             </div>

@@ -59,15 +59,16 @@ public class ArticleService {
 		return ResultData.from("S-1", "접근이 가능합니다.");
 	}
 
-	public List<Article> getArticles(int boardId, int itemsCountInPage, int page) {
+	public List<Article> getArticles(int boardId, int itemsCountInPage, String searchKeyword,
+			String searchKeywordType, int page) {
 
 		int limitStart = (page - 1) * itemsCountInPage;
 		int limitTake = itemsCountInPage;
 
-		return articleRepository.getArticles(boardId, limitStart, limitTake);
+		return articleRepository.getArticles(boardId, limitStart, limitTake, searchKeyword, searchKeywordType);
 	}
 
-	public int getArticlesCount(Board board) {
-		return articleRepository.getArticlesCount(board.getId());
+	public int getArticlesCount(Board board, String searchKeyword, String searchKeywordType) {
+		return articleRepository.getArticlesCount(board.getId(), searchKeyword, searchKeywordType);
 	}
 }

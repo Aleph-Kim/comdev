@@ -15,6 +15,7 @@ import com.sbs.exam.demo.vo.Rq;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -66,7 +67,11 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, int boardId, int page) {
+	public String showList(Model model,
+			@RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "") String searchKeyword,
+			@RequestParam(defaultValue = "title, body") String searchKeywordType,
+			@RequestParam(defaultValue = "1") int page) {
 		Board board = boardService.getBoard(boardId);
 		List<Article> articles;
 
@@ -76,13 +81,13 @@ public class UsrArticleController {
 
 		int itemsCountInPage = 10;
 
-		articles = articleService.getArticles(boardId, itemsCountInPage, page);
+		articles = articleService.getArticles(boardId, itemsCountInPage, searchKeyword, searchKeywordType, page);
 
 		if (articles.size() == 0) {
 			return rq.jsHistoryBackOnView("존재하지 않는 페이지입니다.");
 		}
 
-		int articlesCount = articleService.getArticlesCount(board);
+		int articlesCount = articleService.getArticlesCount(board, searchKeyword, searchKeywordType);
 		int pageCount = (articlesCount + 1) / 10;
 
 		model.addAttribute("page", page);
