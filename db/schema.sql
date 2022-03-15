@@ -127,5 +127,5 @@ INSERT INTO article
 SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('제목 ', RAND()), CONCAT('내용 ', RAND())
 FROM article;
 
-SELECT *
-FROM article;
+ALTER TABLE article
+ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;

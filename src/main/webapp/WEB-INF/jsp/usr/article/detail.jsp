@@ -22,19 +22,23 @@
                             <td>${article.regDate.substring(0, 16)}</td>
                         </tr>
                         <tr>
-                            <th>게시물 수정날짜</th>
+                            <th>수정날짜</th>
                             <td>${article.updateDate.substring(0, 16)}</td>
                         </tr>
                         <tr>
-                            <th>게시물 작성자</th>
+                            <th>작성자</th>
                             <td>${article.extra__writerName}</td>
                         </tr>
                         <tr>
-                            <th>게시물 제목</th>
+                            <th>조회수</th>
+                            <td>${article.hitCount}</td>
+                        </tr>
+                        <tr>
+                            <th>제목</th>
                             <td>${article.title}</td>
                         </tr>
                         <tr>
-                            <th>게시물 내용</th>
+                            <th>내용</th>
                             <td>${article.body}</td>
                         </tr>
                     </tbody>

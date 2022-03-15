@@ -108,6 +108,8 @@ public class UsrArticleController {
 			return rq.jsHistoryBackOnView(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
+		articleService.increaseHitCount(id);
+
 		Board board = boardService.getBoard(article.getBoardId());
 
 		model.addAttribute("article", article);

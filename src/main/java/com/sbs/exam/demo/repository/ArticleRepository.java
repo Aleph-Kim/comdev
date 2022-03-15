@@ -7,6 +7,7 @@ import com.sbs.exam.demo.vo.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface ArticleRepository {
@@ -88,4 +89,11 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticlesCount(@Param("boardId") int boardId, String searchKeyword, String searchKeywordType);
+
+	@Update("""
+			update article
+			set hitCount = hitCount + 1
+			where id = #{id}
+			""")
+	public int increaseHitCount(int id);
 }
