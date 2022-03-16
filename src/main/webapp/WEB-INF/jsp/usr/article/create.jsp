@@ -2,7 +2,7 @@
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="게시물 작성" />
 
-        <%@ include file="../common/head.jsp" %>
+        <%@ include file="../common/head.jspf" %>
             <form action="../article/doAdd" method="post">
                 <input type="hidden" name="id" value="${article.id}" />
                 <div>
@@ -48,4 +48,4 @@
                 </div>
             </form>
 
-            <%@ include file="../common/foot.jsp" %>
+            <%@ include file="../common/foot.jspf" %>

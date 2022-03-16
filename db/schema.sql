@@ -129,3 +129,59 @@ FROM article;
 
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+CREATE TABLE likePoint (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(30) NOT NULL COMMENT '관련데이터타입코드',
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
+    `like` SMALLINT(2) NOT NULL
+);
+
+## 1번 회원이 1번 article 에 대해서 싫어요
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`like` = -1;
+
+## 1번 회원이 2번 article 에 대해서 좋아요.
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 2,
+`like` = 1;
+
+## 2번 회원이 1번 article 에 대해서 싫어요
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`like` = -1;
+
+## 2번 회원이 2번 article 에 대해서 좋아요
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 2,
+`like` = 1;
+
+## 3번 회원이 1번 article 에 대해서 좋아요
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`like` = 1;
+

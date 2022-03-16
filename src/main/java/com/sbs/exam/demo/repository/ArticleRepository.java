@@ -15,12 +15,24 @@ public interface ArticleRepository {
 			@Param("memberId") int memberId, @Param("boardId") int boardId);
 
 	@Select("""
-				select A.*,
-				M.nickname AS extra__writerName
-				from article AS A
-				LEFT JOIN member AS M
-				ON A.memberId = M.id
-				where A.id = #{id}
+				<script>
+					SELECT A.*,
+					IFNULL(SUM(LP.like), 0) AS extra__sumLikePoint,
+					IFNULL(SUM(IF(LP.like &gt; 0, LP.like, 0)), 0) AS extra__goodLikePoint,
+					IFNULL(SUM(IF(LP.like &lt; 0, LP.like, 0)), 0) AS extra__badLikePoint
+					FROM (
+						select A.*,
+						M.nickname AS extra__writerName
+						from article AS A
+						LEFT JOIN `member` AS M
+						ON A.memberId = M.id
+						where A.id = #{id}
+					) AS A
+					LEFT JOIN likePoint AS LP
+					ON LP.relTypeCode = 'article'
+					AND A.id = LP.relId
+					GROUP BY A.id
+				</script>
 			""")
 	public Article getArticle(@Param("id") int id);
 
@@ -33,32 +45,43 @@ public interface ArticleRepository {
 	@Select("""
 				<script>
 					SELECT A.*,
-					M.nickname AS extra__writerName
-					FROM article AS A
-					LEFT JOIN member AS M
-					ON A.memberId = M.id
-					WHERE boardId = #{boardId}
-					<if test="searchKeyword != ''">
-						<choose>
-							<when test="searchKeywordType == 'title'">
-								AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-							</when>
-							<when test="searchKeywordType == 'body'">
-								AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-							</when>
-							<otherwise>
-								AND (
-									A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-									OR
-									A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-								)
-							</otherwise>
-						</choose>
-					</if>
-					ORDER BY A.id DESC
-					<if test="limitTake > -1">
-						LIMIT #{limitStart}, #{limitTake}
-					</if>
+					IFNULL(SUM(LP.like), 0) AS extra__sumLikePoint,
+					IFNULL(SUM(IF(LP.like &gt; 0, LP.like, 0)), 0) AS extra__goodLikePoint,
+					IFNULL(SUM(IF(LP.like &lt; 0, LP.like, 0)), 0) AS extra__badLikePoint
+					FROM (
+						SELECT A.*,
+						M.nickname AS extra__writerName
+						FROM article AS A
+						LEFT JOIN `member` AS M
+						ON A.memberId = M.id
+						WHERE 1
+						AND boardId = #{boardId}
+						<if test="searchKeyword != ''">
+							<choose>
+								<when test="searchKeywordType == 'title'">
+									AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+								</when>
+								<when test="searchKeywordType == 'body'">
+									AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+								</when>
+								<otherwise>
+									AND (
+										A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+										OR
+										A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+									)
+								</otherwise>
+							</choose>
+						</if>
+						ORDER BY A.id DESC
+						<if test="limitTake > -1">
+							LIMIT #{limitStart}, #{limitTake}
+						</if>
+					) AS A
+					LEFT JOIN likePoint AS LP
+					ON LP.relTypeCode = 'article'
+					AND A.id = LP.relId
+					GROUP BY A.id
 				</script>
 			""")
 	public List<Article> getArticles(@Param("boardId") int boardId, int limitStart,

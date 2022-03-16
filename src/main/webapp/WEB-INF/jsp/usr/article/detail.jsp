@@ -46,11 +46,11 @@
                         </tr>
                         <tr>
                             <th>작성날짜</th>
-                            <td>${article.regDate.substring(0, 16)}</td>
+                            <td>${article.forPrintType2RegDate}</td>
                         </tr>
                         <tr>
                             <th>수정날짜</th>
-                            <td>${article.updateDate.substring(0, 16)}</td>
+                            <td>${article.forPrintType2UpdateDate}</td>
                         </tr>
                         <tr>
                             <th>작성자</th>
@@ -69,6 +69,10 @@
                         <tr>
                             <th>내용</th>
                             <td>${article.body}</td>
+                        </tr>
+                        <tr>
+                            <th>좋아요</th>
+                            <td>${article.extra__sumLikePoint}</td>
                         </tr>
                     </tbody>
                 </table>

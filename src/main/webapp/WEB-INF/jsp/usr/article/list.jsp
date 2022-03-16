@@ -27,6 +27,7 @@
                         <col width="" />
                         <col width="250" />
                         <col width="150" />
+                        <col width="50" />
                     </colgroup>
                     <thead>
                         <tr>
@@ -34,6 +35,7 @@
                             <th class="border border-gray-500">제목</th>
                             <th class="border border-gray-500">날짜</th>
                             <th class="border border-gray-500">작성자</th>
+                            <th class="border border-gray-500">좋아요</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,10 +49,13 @@
                                     ${article.title}
                                 </td>
                                 <td class="border border-gray-500 !z-[-1]">
-                                    ${article.regDate.substring(2, 10)}
+                                    ${article.forPrintType1RegDate}
                                 </td>
                                 <td class="border border-gray-500 !z-[-1]">
                                     ${article.extra__writerName}
+                                </td>
+                                <td class="border border-gray-500 !z-[-1]">
+                                    ${article.extra__sumLikePoint}
                                 </td>
                             </tr>
                         </c:forEach>

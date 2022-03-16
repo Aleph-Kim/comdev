@@ -18,4 +18,23 @@ public class Article {
 	private int hitCount;
 
 	private String extra__writerName;
+	private int extra__sumLikePoint;
+	private int extra__goodLikePoint;
+	private int extra__badLikePoint;
+
+	public String getForPrintType1RegDate() {
+		return regDate.substring(0, 10).replace(" ", "<br>");
+	}
+
+	public String getForPrintType1UpdateDate() {
+		return updateDate.substring(0, 10).replace(" ", "<br>");
+	}
+
+	public String getForPrintType2RegDate() {
+		return regDate.substring(2, 16);
+	}
+
+	public String getForPrintType2UpdateDate() {
+		return updateDate.substring(2, 16);
+	}
 }
