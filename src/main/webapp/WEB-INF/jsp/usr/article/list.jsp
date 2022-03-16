@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table class="table w-full text-center border border-gray-500">
+                <table class="table w-full text-center border_table">
                     <colgroup>
                         <col width="50" />
                         <col width="" />
@@ -31,30 +31,30 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th class="border border-gray-500 !z-[-1]">번호</th>
-                            <th class="border border-gray-500">제목</th>
-                            <th class="border border-gray-500">날짜</th>
-                            <th class="border border-gray-500">작성자</th>
-                            <th class="border border-gray-500">좋아요</th>
+                            <th class=" !z-[-1]">번호</th>
+                            <th class="">제목</th>
+                            <th class="">날짜</th>
+                            <th class="">작성자</th>
+                            <th class="">좋아요</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="article" items="${articles}">
                             <tr class="hover cursor-pointer"
                                 onclick="window.location.href='/usr/article/detail?id=${article.id}'">
-                                <td class="border border-gray-500 !z-[-1]">
+                                <td class=" !z-[-1]">
                                     ${article.id}
                                 </td>
-                                <td class="border border-gray-500 !z-[-1]">
+                                <td class=" !z-[-1]">
                                     ${article.title}
                                 </td>
-                                <td class="border border-gray-500 !z-[-1]">
+                                <td class=" !z-[-1]">
                                     ${article.forPrintType1RegDate}
                                 </td>
-                                <td class="border border-gray-500 !z-[-1]">
+                                <td class=" !z-[-1]">
                                     ${article.extra__writerName}
                                 </td>
-                                <td class="border border-gray-500 !z-[-1]">
+                                <td class=" !z-[-1]">
                                     ${article.extra__sumLikePoint}
                                 </td>
                             </tr>

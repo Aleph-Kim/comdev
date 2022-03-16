@@ -75,4 +75,8 @@ public class ArticleService {
 	public int increaseHitCount(int id) {
 		return articleRepository.increaseHitCount(id);
 	}
+
+	public boolean actorCanMakeLikePoint(int actorId, int id) {
+		return articleRepository.getSumLikePointByMemberId(id, actorId) == 0;
+	}
 }

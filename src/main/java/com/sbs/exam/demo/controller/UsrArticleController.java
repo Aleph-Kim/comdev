@@ -113,6 +113,10 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		model.addAttribute("board", board);
 
+		boolean actorCanMakeLikePoint = articleService.actorCanMakeLikePoint(rq.getLoginedMemberId(), id);
+
+		model.addAttribute("actorCanMakeLikePoint", actorCanMakeLikePoint);
+
 		return "/usr/article/detail";
 	}
 

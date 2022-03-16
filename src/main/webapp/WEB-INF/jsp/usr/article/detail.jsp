@@ -31,7 +31,7 @@
             </script>
 
             <div class="overflow-y-auto">
-                <table class="table w-full border border_table">
+                <table class="table w-full border_table">
                     <colgroup>
                         <col width="200" />
                     </colgroup>
@@ -63,6 +63,14 @@
                             </div>
                         </tr>
                         <tr>
+                            <th>좋아요</th>
+                            <td>${article.extra__goodLikePoint}</td>
+                        </tr>
+                        <tr>
+                            <th>싫어요</th>
+                            <td>${article.extra__badLikePoint}</td>
+                        </tr>
+                        <tr>
                             <th>제목</th>
                             <td>${article.title}</td>
                         </tr>
@@ -70,14 +78,10 @@
                             <th>내용</th>
                             <td>${article.body}</td>
                         </tr>
-                        <tr>
-                            <th>좋아요</th>
-                            <td>${article.extra__sumLikePoint}</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="flex flex-row-reverse mt-2">
+            <div class="flex flex-row-reverse mt-3">
                 <button class="btn" onclick="history.back();">뒤로가기</button>
                 <c:if test="${article.memberId == sessionScope.LoginedMember.id}">
                     <a onclick="if (confirm('정말 삭제하시겠습니까?') == false);" href="/usr/article/doDelete?id=${article.id}"
@@ -87,5 +91,11 @@
                     <a href="/usr/article/modify?id=${article.id}" class="btn">수정</a>
                 </c:if>
             </div>
+            <c:if test="${actorCanMakeLikePoint}">
+                <div class="flex justify-center mt-5">
+                    <a href="" class="btn mr-2">좋아요</a>
+                    <a href="" class="btn ml-2">싫어요</a>
+                </div>
+            </c:if>
 
             <%@ include file="../common/foot.jspf" %>

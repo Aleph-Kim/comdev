@@ -119,4 +119,15 @@ public interface ArticleRepository {
 			where id = #{id}
 			""")
 	public int increaseHitCount(int id);
+
+	@Select("""
+			<script>
+			SELECT IFNULL(SUM(LP.like), 0) AS s
+			FROM likePoint AS LP
+			WHERE lp.relTypeCode = 'article'
+			AND lp.relId = #{id}
+			AND lp.memberId = #{memberId}
+			</script>
+			""")
+	public int getSumLikePointByMemberId(int id, int memberId);
 }

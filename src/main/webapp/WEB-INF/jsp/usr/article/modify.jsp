@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <c:set var="pageTitle" value="게시물 상세페이지" />
+        <c:set var="pageTitle" value="게시물 수정" />
 
         <%@ include file="../common/head.jspf" %>
             <form action="../article/doModify" method="post">
@@ -26,6 +26,14 @@
                             <tr>
                                 <th>게시물 작성자</th>
                                 <td>${article.extra__writerName}</td>
+                            </tr>
+                            <tr>
+                                <th>좋아요</th>
+                                <td>${article.extra__goodLikePoint}</td>
+                            </tr>
+                            <tr>
+                                <th>싫어요</th>
+                                <td>${article.extra__badLikePoint}</td>
                             </tr>
                             <tr>
                                 <th>게시물 제목</th>
