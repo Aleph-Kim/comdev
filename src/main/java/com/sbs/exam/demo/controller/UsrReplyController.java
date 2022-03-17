@@ -21,10 +21,19 @@ public class UsrReplyController {
 
     @RequestMapping("/usr/reply/doWrite")
     @ResponseBody
-    public String doAddreply(String body, int articleId) {
+    public String doAdd(String body, int articleId) {
 
-        replyService.addreply(body, articleId, rq.getLoginedMemberId());
+        replyService.addReply(body, articleId, rq.getLoginedMemberId());
 
         return rq.jsReplace("댓글이 등록되었습니다.", Ut.f("../article/detail?id=%d", articleId));
+    }
+
+    @RequestMapping("/usr/reply/doDelete")
+    @ResponseBody
+    public String doDelete(int replyId, int articleId) {
+
+        replyService.doDelete(replyId);
+
+        return rq.jsReplace("댓글이 삭제되었습니다.", Ut.f("../article/detail?id=%d", articleId));
     }
 }

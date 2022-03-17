@@ -15,7 +15,7 @@ public class ReplyService {
         this.replyRepository = replyRepository;
     }
 
-    public void addreply(String body, int articleId, int memberId) {
+    public void addReply(String body, int articleId, int memberId) {
         replyRepository.addreply(body, articleId, memberId);
     }
 
@@ -25,5 +25,9 @@ public class ReplyService {
 
     public int getReplyCount(int id) {
         return replyRepository.getReplyCount(id);
+    }
+
+    public void doDelete(int replyId) {
+        replyRepository.deleteReply(replyId);
     }
 }

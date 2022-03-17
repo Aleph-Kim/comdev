@@ -5,6 +5,14 @@
         <%@ include file="../common/head.jspf" %>
 
             <script>
+                console.log("qweqweqwe")
+                $(".replyModifyBtn").click(function () {
+                    $(".showReply").addClass("hidden");
+                    $(".modifyReply").removeClass("hidden");
+                    $(".modifyReply").addClass("block");
+                });
+            </script>
+            <script>
                 const params = {};
                 params.id = parseInt('${ param.id }');
 
@@ -166,7 +174,14 @@
                     <c:forEach var="reply" items="${replies}">
                         <div
                             class="flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:bg-slate-50 hover:border border-[#79797965]">
-                            <div class="max-w-full">
+                            <div class="hidden modifyReply">
+                                <form action="../reply/doModify">
+                                    <textarea class="hidden textarea max-w-full">
+                                    ${reply.body}
+                                </textarea>
+                                </form>
+                            </div>
+                            <div class="showReply max-w-full">
                                 ${reply.body}
                             </div>
                             <div class="">
@@ -176,6 +191,12 @@
                                 <span>
                                     ${reply.forPrintType1RegDate}
                                 </span>
+                                <button class="btn mx-3 replyModifyBtn">
+                                    수정
+                                </button>
+                                <a class="btn" href="../reply/doDelete?replyId=${reply.id}&articleId=${article.id}">
+                                    삭제
+                                </a>
                             </div>
                         </div>
                     </c:forEach>
