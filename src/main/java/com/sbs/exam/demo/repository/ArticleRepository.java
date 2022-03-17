@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.sbs.exam.demo.vo.Article;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -17,9 +19,7 @@ public interface ArticleRepository {
 	@Select("""
 				<script>
 					SELECT A.*,
-					IFNULL(SUM(LP.like), 0) AS extra__sumLikePoint,
-					IFNULL(SUM(IF(LP.like &gt; 0, LP.like, 0)), 0) AS extra__goodLikePoint,
-					IFNULL(SUM(IF(LP.like &lt; 0, LP.like, 0)), 0) AS extra__badLikePoint
+					IFNULL(SUM(LP.like), 0) AS extra__LikePoint
 					FROM (
 						select A.*,
 						M.nickname AS extra__writerName
@@ -29,8 +29,7 @@ public interface ArticleRepository {
 						where A.id = #{id}
 					) AS A
 					LEFT JOIN likePoint AS LP
-					ON LP.relTypeCode = 'article'
-					AND A.id = LP.relId
+					ON A.id = LP.relId
 					GROUP BY A.id
 				</script>
 			""")
@@ -45,9 +44,7 @@ public interface ArticleRepository {
 	@Select("""
 				<script>
 					SELECT A.*,
-					IFNULL(SUM(LP.like), 0) AS extra__sumLikePoint,
-					IFNULL(SUM(IF(LP.like &gt; 0, LP.like, 0)), 0) AS extra__goodLikePoint,
-					IFNULL(SUM(IF(LP.like &lt; 0, LP.like, 0)), 0) AS extra__badLikePoint
+					IFNULL(SUM(LP.like), 0) AS extra__LikePoint
 					FROM (
 						SELECT A.*,
 						M.nickname AS extra__writerName
@@ -79,8 +76,7 @@ public interface ArticleRepository {
 						</if>
 					) AS A
 					LEFT JOIN likePoint AS LP
-					ON LP.relTypeCode = 'article'
-					AND A.id = LP.relId
+					ON A.id = LP.relId
 					GROUP BY A.id
 				</script>
 			""")
@@ -124,10 +120,27 @@ public interface ArticleRepository {
 			<script>
 			SELECT IFNULL(SUM(LP.like), 0) AS s
 			FROM likePoint AS LP
-			WHERE lp.relTypeCode = 'article'
-			AND lp.relId = #{id}
-			AND lp.memberId = #{memberId}
+			WHERE Lp.relId = #{id}
+			AND Lp.memberId = #{memberId}
 			</script>
 			""")
-	public int getSumLikePointByMemberId(int id, int memberId);
+	public int getLikePointByMemberId(int id, int memberId);
+
+	@Insert("""
+
+			insert into likePoint
+			set regDate = now(),
+			updateDate = now(),
+			memberId = #{memberId},
+			relId = #{articleId}
+			""")
+	public void doIncreaseLikePoint(int articleId, int memberId);
+
+	@Delete("""
+			delete
+			from likePoint
+			where memberId = #{memberId}
+			AND relId = #{articleId}
+			""")
+	public void doDecreaseLikePoint(int articleId, int memberId);
 }

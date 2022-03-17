@@ -55,7 +55,7 @@
                                     ${article.extra__writerName}
                                 </td>
                                 <td class=" !z-[-1]">
-                                    ${article.extra__sumLikePoint}
+                                    ${article.extra__LikePoint}
                                 </td>
                             </tr>
                         </c:forEach>

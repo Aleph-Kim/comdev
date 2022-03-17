@@ -29,11 +29,7 @@
                             </tr>
                             <tr>
                                 <th>좋아요</th>
-                                <td>${article.extra__goodLikePoint}</td>
-                            </tr>
-                            <tr>
-                                <th>싫어요</th>
-                                <td>${article.extra__badLikePoint}</td>
+                                <td>${article.extra__LikePoint}</td>
                             </tr>
                             <tr>
                                 <th>게시물 제목</th>

@@ -18,9 +18,7 @@ public class Article {
 	private int hitCount;
 
 	private String extra__writerName;
-	private int extra__sumLikePoint;
-	private int extra__goodLikePoint;
-	private int extra__badLikePoint;
+	private int extra__LikePoint;
 
 	public String getForPrintType1RegDate() {
 		return regDate.substring(0, 10).replace(" ", "<br>");

@@ -9,6 +9,14 @@
                 params.id = parseInt('${ param.id }');
 
                 function ArticleDetail__increaseHitCount() {
+                    const localStorageKey = 'article__' + params.id + '__viewDone';
+
+                    if (localStorage.getItem(localStorageKey)) {
+                        return;
+                    }
+
+                    localStorage.setItem(localStorageKey, true);
+
                     $.get('../article/doIncreaseHitCount', {
                         id: params.id,
                         ajaxMode: 'Y'
@@ -18,15 +26,7 @@
                 }
 
                 $(function () {
-                    const localStorageKey = 'article__' + params.id + '__viewDone';
-
-                    if (localStorage.getItem(localStorageKey)) {
-                        return;
-                    }
-
-                    localStorage.setItem(localStorageKey, true);
-
-                    ArticleDetail__increaseHitCount();
+                    setTimeout(ArticleDetail__increaseHitCount, 500);
                 })
             </script>
 
@@ -64,11 +64,17 @@
                         </tr>
                         <tr>
                             <th>좋아요</th>
-                            <td>${article.extra__goodLikePoint}</td>
-                        </tr>
-                        <tr>
-                            <th>싫어요</th>
-                            <td>${article.extra__badLikePoint}</td>
+                            <td class="flex items-center">
+                                <c:choose>
+                                    <c:when test="${sessionScope.LoginedMemberId > -1 && actorCanMakeLikePoint}">
+                                        <span>🧡</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span>🤍</span>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span>${article.extra__LikePoint}</span>
+                            </td>
                         </tr>
                         <tr>
                             <th>제목</th>
@@ -91,11 +97,21 @@
                     <a href="/usr/article/modify?id=${article.id}" class="btn">수정</a>
                 </c:if>
             </div>
-            <c:if test="${actorCanMakeLikePoint}">
-                <div class="flex justify-center mt-5">
-                    <a href="" class="btn mr-2">좋아요</a>
-                    <a href="" class="btn ml-2">싫어요</a>
-                </div>
-            </c:if>
+            <div class="flex justify-center mt-5">
+                <c:choose>
+                    <c:when test="${sessionScope.LoginedMemberId > -1 && actorCanMakeLikePoint}">
+                        <a href="../article/doDecreaseLikePoint?articleId=${article.id}" class="flex items-center">
+                            <span>좋아요</span>
+                            <span class="text-[3rem] mb-1">🧡</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="../article/doIncreaseLikePoint?articleId=${article.id}" class="flex items-center">
+                            <span>좋아요</span>
+                            <span class="text-[3rem] mb-1">🤍</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
 
             <%@ include file="../common/foot.jspf" %>

@@ -127,6 +127,22 @@ public class UsrArticleController {
 		return "증가완료";
 	}
 
+	@RequestMapping("/usr/article/doIncreaseLikePoint")
+	@ResponseBody
+	public String doIncreaseLikePoint(int articleId) {
+
+		articleService.doIncreaseLikePoint(articleId, rq.getLoginedMemberId());
+		return rq.jsReplace("", Ut.f("../article/detail?id=%d", articleId));
+	}
+
+	@RequestMapping("/usr/article/doDecreaseLikePoint")
+	@ResponseBody
+	public String doDecreaseLikePoint(int articleId) {
+
+		articleService.doDecreaseLikePoint(articleId, rq.getLoginedMemberId());
+		return rq.jsReplace("", Ut.f("../article/detail?id=%d", articleId));
+	}
+
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
