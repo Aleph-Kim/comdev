@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.exam.demo.service.MemberService;
 import com.sbs.exam.demo.util.Ut;
 
 import org.springframework.context.annotation.Scope;
@@ -24,11 +25,14 @@ public class Rq {
     @Getter
     private int loginedMemberId;
 
+    @Getter
+    private Member loginedMemberNow;
+
     private HttpServletRequest req;
     private HttpServletResponse resp;
     private HttpSession httpSession;
 
-    public Rq(HttpServletRequest req, HttpServletResponse resp, Rq rq) {
+    public Rq(HttpServletRequest req, HttpServletResponse resp, Rq rq, MemberService memberService) {
         this.req = req;
         this.resp = resp;
         this.httpSession = this.req.getSession();
@@ -36,14 +40,19 @@ public class Rq {
 
         boolean isLogined = false;
         int loginedMemberId = 0;
+        Member loginedMemberNow = null;
 
         if (httpSession.getAttribute("LoginedMemberId") != null) {
             isLogined = true;
             loginedMemberId = (int) httpSession.getAttribute("LoginedMemberId");
+            loginedMemberNow = (Member) memberService.searchUserId(loginedMemberId);
         }
 
         this.isLogined = isLogined;
         this.loginedMemberId = loginedMemberId;
+        this.loginedMemberNow = loginedMemberNow;
+
+        this.req.setAttribute("rq", this);
     }
 
     public void printHistoryBackJs(String msg) {
@@ -64,6 +73,10 @@ public class Rq {
     public void login(Member member) {
         httpSession.setAttribute("LoginedMemberId", member.getId());
         httpSession.setAttribute("LoginedMember", member);
+    }
+
+    public Member getLoginedMember() {
+        return (Member) httpSession.getAttribute("LoginedMemberId");
     }
 
     public void logout() {

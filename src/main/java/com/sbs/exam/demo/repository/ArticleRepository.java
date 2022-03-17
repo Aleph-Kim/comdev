@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.sbs.exam.demo.vo.Article;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -125,22 +123,4 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getLikePointByMemberId(int id, int memberId);
-
-	@Insert("""
-
-			insert into likePoint
-			set regDate = now(),
-			updateDate = now(),
-			memberId = #{memberId},
-			relId = #{articleId}
-			""")
-	public void doIncreaseLikePoint(int articleId, int memberId);
-
-	@Delete("""
-			delete
-			from likePoint
-			where memberId = #{memberId}
-			AND relId = #{articleId}
-			""")
-	public void doDecreaseLikePoint(int articleId, int memberId);
 }

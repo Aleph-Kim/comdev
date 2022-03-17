@@ -13,7 +13,7 @@
                         <tbody>
                             <tr>
                                 <th>게시물 작성자</th>
-                                <td>${sessionScope.LoginedMember.nickname}</td>
+                                <td>${rq.loginedMemberNow.nickname}</td>
                             </tr>
                             <tr>
                                 <th>게시판 선택</th>

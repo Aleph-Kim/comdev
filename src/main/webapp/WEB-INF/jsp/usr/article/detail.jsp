@@ -30,6 +30,42 @@
                 })
             </script>
 
+            <script>
+                let ReplyWrite__submitFormDone = false;
+
+                function ReplyWrite__submitForm(form) {
+                    if (ReplyWrite__submitFormDone) {
+                        return true;
+                    }
+
+                    form.body.value = form.body.value.trim();
+
+                    if (form.body.value.length == 0) {
+                        alert('댓글을 입력해주세요.');
+                        form.body.focus();
+                        return "false";
+                    }
+                    if (form.body.value.length < 5) {
+                        alert('댓글을 5글자 이상 입력해주세요.');
+                        form.body.focus();
+                        return false;
+                    }
+
+                    ReplyWrite__submitFormDone = true;
+                    form.submit();
+                }
+            </script>
+
+            <div class="flex flex-row-reverse mb-3">
+                <button class="btn" onclick="history.back();">뒤로가기</button>
+                <c:if test="${article.memberId == sessionScope.LoginedMember.id}">
+                    <a onclick="if (confirm('정말 삭제하시겠습니까?') == false);" href="/usr/article/doDelete?id=${article.id}"
+                        class="btn mx-2">
+                        삭제
+                    </a>
+                    <a href="/usr/article/modify?id=${article.id}" class="btn">수정</a>
+                </c:if>
+            </div>
             <div class="overflow-y-auto">
                 <table class="table w-full border_table">
                     <colgroup>
@@ -67,10 +103,16 @@
                             <td class="flex items-center">
                                 <c:choose>
                                     <c:when test="${sessionScope.LoginedMemberId > -1 && actorCanMakeLikePoint}">
-                                        <span>🧡</span>
+                                        <a href="../article/doDecreaseLikePoint?articleId=${article.id}"
+                                            class="flex items-center">
+                                            <span>🧡</span>
+                                        </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <span>🤍</span>
+                                        <a href="../article/doIncreaseLikePoint?articleId=${article.id}"
+                                            class="flex items-center">
+                                            <span>🤍</span>
+                                        </a>
                                     </c:otherwise>
                                 </c:choose>
                                 <span>${article.extra__LikePoint}</span>
@@ -87,15 +129,57 @@
                     </tbody>
                 </table>
             </div>
-            <div class="flex flex-row-reverse mt-3">
-                <button class="btn" onclick="history.back();">뒤로가기</button>
-                <c:if test="${article.memberId == sessionScope.LoginedMember.id}">
-                    <a onclick="if (confirm('정말 삭제하시겠습니까?') == false);" href="/usr/article/doDelete?id=${article.id}"
-                        class="btn mx-2">
-                        삭제
-                    </a>
-                    <a href="/usr/article/modify?id=${article.id}" class="btn">수정</a>
-                </c:if>
+            <div class="mt-6 border-t w-full">
+                <div class="mt-3 w-full">
+                    <form action="../reply/doWrite" method="POST"
+                        onsubmit='ReplyWrite__submitForm(this); return false;'>
+                        <input type="hidden" name="articleId" value="${article.id}">
+                        <div class="text-[1.3rem]">댓글 작성</div>
+                        <c:choose>
+                            <c:when test="${sessionScope.LoginedMemberId > -1}">
+                                <div class="flex items-center">
+                                    <textarea rows="5" placeholder="댓글을 입력해주세요."
+                                        class="textarea textarea-bordered w-full min-h-[10rem] max-w-full my-2"
+                                        name="body"></textarea>
+                                    <button type="submit" class="btn ml-3">댓글 작성</button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <textarea rows="5" placeholder="로그인 후 이용해주세요."
+                                    class="textarea w-full min-h-[10rem] my-2" disabled></textarea>
+                                <div class="flex justify-end">
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-6 border-t">
+                <div class="mt-3 w-full max-w-full border border-[#79797965] p-5 rounded">
+                    <div class="text-[1.3rem]">댓글 : ${replyCount}</div>
+                    <c:if test="${empty replies}">
+                        <div class="mt-3">
+                            댓글이 없습니다. 첫 댓글의 주인이 되어주세요!
+                        </div>
+                    </c:if>
+                    <c:set var="replyCounter" value="1" />
+                    <c:forEach var="reply" items="${replies}">
+                        <div
+                            class="flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:bg-slate-50 hover:border border-[#79797965]">
+                            <div class="max-w-full">
+                                ${reply.body}
+                            </div>
+                            <div class="">
+                                <span class="mr-10 border-y-4 border-black">
+                                    ${reply.extra__writerName}
+                                </span>
+                                <span>
+                                    ${reply.forPrintType1RegDate}
+                                </span>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
             <div class="flex justify-center mt-5">
                 <c:choose>

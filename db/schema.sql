@@ -86,6 +86,7 @@ SET memberId = 2
 WHERE memberId = 0;
 
 
+# 게시판 테이블
 CREATE TABLE board (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -93,7 +94,7 @@ CREATE TABLE board (
     `code` CHAR(100) NOT NULL UNIQUE COMMENT 'notice(공지사항), free1(자유게시판1), free2(자유게시판2)',
     `name` CHAR(100) NOT NULL UNIQUE COMMENT '게시판 이름'
 );
-
+# 게시판 테이블 테스트 데이터
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -106,8 +107,10 @@ updateDate = NOW(),
 `code` = 'free1',
 `name` = '자유게시판';
 
+# article 테이블에 boardId 칼럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
 
+# article 테스트 데이터
 UPDATE article
 SET boardId = 1
 WHERE id = 1;
@@ -120,6 +123,7 @@ UPDATE article
 SET boardId = 2
 WHERE id = 3;
 
+# article 테스트 데이터
 INSERT INTO article 
 (
 	regDate, updateDate, memberId, boardId, title, `body`
@@ -127,61 +131,63 @@ INSERT INTO article
 SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('제목 ', RAND()), CONCAT('내용 ', RAND())
 FROM article;
 
+# 게시물 테이블에 조회수 칼럼 추가
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
+# 좋아요 테이블
 CREATE TABLE likePoint (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
-    relTypeCode CHAR(30) NOT NULL COMMENT '관련데이터타입코드',
     relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
-    `like` SMALLINT(2) NOT NULL
+    `like` BOOLEAN NOT NULL DEFAULT 1
 );
 
-## 1번 회원이 1번 article 에 대해서 싫어요
-INSERT INTO likePoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 1,
-relTypeCode = 'article',
-relId = 1,
-`like` = -1;
-
 ## 1번 회원이 2번 article 에 대해서 좋아요.
-INSERT INTO likePoint
+INSERT INTO likePoint 
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
-relTypeCode = 'article',
-relId = 2,
-`like` = 1;
-
-## 2번 회원이 1번 article 에 대해서 싫어요
-INSERT INTO likePoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'article',
-relId = 1,
-`like` = -1;
+relId = 2;
 
 ## 2번 회원이 2번 article 에 대해서 좋아요
 INSERT INTO likePoint
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-relTypeCode = 'article',
-relId = 2,
-`like` = 1;
+relId = 2;
 
 ## 3번 회원이 1번 article 에 대해서 좋아요
 INSERT INTO likePoint
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 3,
-relTypeCode = 'article',
-relId = 1,
-`like` = 1;
+relId = 1;
 
+# 댓글 테이블
+CREATE TABLE reply (
+id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+regDate DATETIME NOT NULL,
+updateDate DATETIME NOT NULL,
+memberId INT(10) UNSIGNED NOT NULL,
+articleId INT(10) UNSIGNED NOT NULL,
+`body` TEXT NOT NULL
+);
+
+# 댓글 테스트 데이터
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+articleId = 1,
+`body` = 1234;
+
+# 댓글 테스트 데이터
+INSERT INTO reply
+(
+	regDate, updateDate, memberId, articleId, `body`
+)
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('내용 ', RAND())
+FROM reply;

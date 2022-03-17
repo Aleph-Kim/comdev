@@ -79,12 +79,4 @@ public class ArticleService {
 	public boolean actorCanMakeLikePoint(int actorId, int id) {
 		return articleRepository.getLikePointByMemberId(id, actorId) != 0;
 	}
-
-	public void doIncreaseLikePoint(int articleId, int memberId) {
-		articleRepository.doIncreaseLikePoint(articleId, memberId);
-	}
-
-	public void doDecreaseLikePoint(int articleId, int memberId) {
-		articleRepository.doDecreaseLikePoint(articleId, memberId);
-	}
 }

@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sbs.exam.demo.service.ArticleService;
 import com.sbs.exam.demo.service.BoardService;
+import com.sbs.exam.demo.service.ReplyService;
 import com.sbs.exam.demo.util.Ut;
-import com.sbs.exam.demo.vo.Article;
-import com.sbs.exam.demo.vo.Board;
-import com.sbs.exam.demo.vo.ResultData;
-import com.sbs.exam.demo.vo.Rq;
+import com.sbs.exam.demo.vo.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,18 +21,21 @@ public class UsrArticleController {
 
 	private ArticleService articleService;
 	private BoardService boardService;
+	private ReplyService replyService;
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, ReplyService replyService,
+			Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.replyService = replyService;
 		this.rq = rq;
 	}
 
 	// 액션 메서드 시작
 
 	@RequestMapping("/usr/article/Add")
-	public String Add(HttpServletRequest req) {
+	public String Add(HttpServletRequest req, Model model) {
 		return "/usr/article/create";
 	}
 
@@ -109,9 +110,13 @@ public class UsrArticleController {
 		}
 
 		Board board = boardService.getBoard(article.getBoardId());
+		List<Reply> replies = replyService.getReplies(id);
+		int replyCount = replyService.getReplyCount(id);
 
 		model.addAttribute("article", article);
 		model.addAttribute("board", board);
+		model.addAttribute("replies", replies);
+		model.addAttribute("replyCount", replyCount);
 
 		boolean actorCanMakeLikePoint = articleService.actorCanMakeLikePoint(rq.getLoginedMemberId(), id);
 
@@ -125,22 +130,6 @@ public class UsrArticleController {
 	public String doincreaseHitcount(int id) {
 		articleService.increaseHitCount(id);
 		return "증가완료";
-	}
-
-	@RequestMapping("/usr/article/doIncreaseLikePoint")
-	@ResponseBody
-	public String doIncreaseLikePoint(int articleId) {
-
-		articleService.doIncreaseLikePoint(articleId, rq.getLoginedMemberId());
-		return rq.jsReplace("", Ut.f("../article/detail?id=%d", articleId));
-	}
-
-	@RequestMapping("/usr/article/doDecreaseLikePoint")
-	@ResponseBody
-	public String doDecreaseLikePoint(int articleId) {
-
-		articleService.doDecreaseLikePoint(articleId, rq.getLoginedMemberId());
-		return rq.jsReplace("", Ut.f("../article/detail?id=%d", articleId));
 	}
 
 	@RequestMapping("/usr/article/doDelete")
