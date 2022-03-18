@@ -3,15 +3,6 @@
         <c:set var="pageTitle" value="게시물 상세페이지" />
 
         <%@ include file="../common/head.jspf" %>
-
-            <script>
-                console.log("qweqweqwe")
-                $(".replyModifyBtn").click(function () {
-                    $(".showReply").addClass("hidden");
-                    $(".modifyReply").removeClass("hidden");
-                    $(".modifyReply").addClass("block");
-                });
-            </script>
             <script>
                 const params = {};
                 params.id = parseInt('${ param.id }');
@@ -172,16 +163,24 @@
                     </c:if>
                     <c:set var="replyCounter" value="1" />
                     <c:forEach var="reply" items="${replies}">
+                        <div class="modifyReply-${reply.id} hidden">
+                            <form action="../reply/doModify">
+                                <span class="flex items-center">
+                                    <input type="hidden" name="replyId" value="${reply.id}">
+                                    <input type="hidden" name="articleId" value="${article.id}">
+                                    <textarea class="textarea textarea-bordered w-[95%]"
+                                        name="body">${reply.body}</textarea>
+                                    <div class="flex flex-col ml-3">
+                                        <button class="btn">수정</button>
+                                        <input type="button" class="modify-close-btn btn mt-2" value="취소"
+                                            onsubmit="return false;" onclick="modify_close('${reply.id}')" />
+                                    </div>
+                                </span>
+                            </form>
+                        </div>
                         <div
-                            class="flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:bg-slate-50 hover:border border-[#79797965]">
-                            <div class="hidden modifyReply">
-                                <form action="../reply/doModify">
-                                    <textarea class="hidden textarea max-w-full">
-                                    ${reply.body}
-                                </textarea>
-                                </form>
-                            </div>
-                            <div class="showReply max-w-full">
+                            class="showReply-${reply.id} flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:bg-slate-50 hover:border border-[#79797965]">
+                            <div class="max-w-full">
                                 ${reply.body}
                             </div>
                             <div class="">
@@ -191,7 +190,7 @@
                                 <span>
                                     ${reply.forPrintType1RegDate}
                                 </span>
-                                <button class="btn mx-3 replyModifyBtn">
+                                <button class="btn mx-3" onclick="reply_modify('${reply.id}')">
                                     수정
                                 </button>
                                 <a class="btn" href="../reply/doDelete?replyId=${reply.id}&articleId=${article.id}">
@@ -218,5 +217,14 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-
+            <script>
+                function reply_modify(id) {
+                    $(`.showReply-` + id).addClass("hidden");
+                    $(`.modifyReply-` + id).removeClass("hidden");
+                };
+                function modify_close(id) {
+                    $(`.modifyReply-` + id).addClass("hidden");
+                    $(`.showReply-` + id).removeClass("hidden");
+                };
+            </script>
             <%@ include file="../common/foot.jspf" %>

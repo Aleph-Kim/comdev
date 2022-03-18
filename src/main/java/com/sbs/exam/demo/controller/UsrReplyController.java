@@ -2,6 +2,8 @@ package com.sbs.exam.demo.controller;
 
 import com.sbs.exam.demo.service.ReplyService;
 import com.sbs.exam.demo.util.Ut;
+import com.sbs.exam.demo.vo.Reply;
+import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
 import org.springframework.stereotype.Controller;
@@ -35,5 +37,20 @@ public class UsrReplyController {
         replyService.doDelete(replyId);
 
         return rq.jsReplace("댓글이 삭제되었습니다.", Ut.f("../article/detail?id=%d", articleId));
+    }
+
+    @RequestMapping("/usr/reply/doModify")
+    @ResponseBody
+    public String doModify(int replyId, int articleId, String body) {
+
+        ResultData<Reply> actorCanModify = replyService.actorCanModify(rq.getLoginedMemberId(), replyId);
+        if (actorCanModify.isFail()) {
+            String msg = actorCanModify.getMsg();
+            return rq.jsReplace(msg, Ut.f("../article/detail?id=%d", articleId));
+        }
+
+        replyService.doModify(replyId, body);
+
+        return rq.jsReplace("댓글이 수정되었습니다.", Ut.f("../article/detail?id=%d", articleId));
     }
 }
