@@ -42,6 +42,7 @@
                         <li><a href="/usr/article/list?boardId=2">자유게시판</a></li>
                         <c:if test="${rq.isLogined()}">
                             <li><a href="/usr/article/Add">글 작성</a></li>
+                            <li><a href="/usr/member/myPage?id=${rq.loginedMemberId}">마이페이지</a></li>
                             <li><a href="/usr/member/doLogout">로그아웃</a></li>
                         </c:if>
                         <c:if test="${rq.isLogined() == false}">

@@ -9,6 +9,7 @@ import com.sbs.exam.demo.vo.ResultData;
 import com.sbs.exam.demo.vo.Rq;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -95,5 +96,13 @@ public class UsrMemberController {
         rq.logout();
 
         return Ut.jsReplace("정상적으로 로그아웃 되었습니다.", "../member/login");
+    }
+
+    @RequestMapping("/usr/member/myPage")
+    public String showMyPage(HttpSession httpSession, Model model, int id) {
+        Member member = memberService.searchUserId(id);
+
+        model.addAttribute("member", member);
+        return "/usr/member/myPage";
     }
 }
