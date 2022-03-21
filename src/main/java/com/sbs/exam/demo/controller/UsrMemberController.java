@@ -105,4 +105,25 @@ public class UsrMemberController {
         model.addAttribute("member", member);
         return "/usr/member/myPage";
     }
+
+    @RequestMapping("/usr/member/passwordCheck")
+    public String showPasswordCheck() {
+        return "/usr/member/passwordCheck";
+    }
+
+    @RequestMapping("/usr/member/doPasswordCheck")
+    @ResponseBody
+    public String doPasswordCheck(String loginPw, String replaceUri) {
+        if (rq.getLoginedMemberNow().getLoginPw().equals(loginPw) == false) {
+            return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+        } else {
+            return rq.jsReplace("", replaceUri);
+        }
+
+    }
+
+    @RequestMapping("/usr/member/modify")
+    public String showModify() {
+        return "/usr/member/modify";
+    }
 }
