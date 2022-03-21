@@ -38,4 +38,12 @@ public class MemberService {
     public Member searchUserId(int id) {
         return memberRepository.searchUserId(id);
     }
+
+    public ResultData<Member> doModify(int id, String password, String name, String nickname,
+            String cellphoneNo, String email) {
+
+        memberRepository.modify(id, password, name, nickname, cellphoneNo, email);
+
+        return ResultData.from("S-1", "회원정보가 수정 되었습니다.");
+    }
 }

@@ -100,6 +100,11 @@ public class UsrMemberController {
 
     @RequestMapping("/usr/member/myPage")
     public String showMyPage(HttpSession httpSession, Model model, int id) {
+
+        if (id != rq.getLoginedMemberId()) {
+            return rq.jsHistoryBackOnView("접근 권한이 없습니다.");
+        }
+
         Member member = memberService.searchUserId(id);
 
         model.addAttribute("member", member);
@@ -125,5 +130,29 @@ public class UsrMemberController {
     @RequestMapping("/usr/member/modify")
     public String showModify() {
         return "/usr/member/modify";
+    }
+
+    @RequestMapping("/usr/member/doModify")
+    @ResponseBody
+    public String doModify(int id, String password, String name, String nickname,
+            String cellphoneNo,
+            String email) {
+        if (Ut.empty(password)) {
+            password = null;
+        }
+
+        if (Ut.empty(name)) {
+            return Ut.jsHistoryBack("이름을 입력해주세요.");
+        }
+        if (Ut.empty(nickname)) {
+            return Ut.jsHistoryBack("닉네임을 입력해주세요.");
+        }
+        if (Ut.empty(email)) {
+            return Ut.jsHistoryBack("이메일을 입력해주세요.");
+        }
+        ResultData<Member> modifyRd = memberService.doModify(id, password, name, nickname, cellphoneNo,
+                email);
+
+        return Ut.jsReplace(modifyRd.getMsg(), Ut.f("../member/myPage?id=%d", id));
     }
 }

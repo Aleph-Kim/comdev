@@ -7,7 +7,7 @@
             <script>
                 let MemberModify__submitDone = false;
                 function MemberModify__submit(form) {
-                    console.log(MemberModify__submitDone);
+                    console.log(form.email);
                     if (MemberModify__submitDone) {
                         return;
                     }
@@ -74,6 +74,7 @@
             </script>
 
             <form action="../member/doModify" method="POST" onsubmit="MemberModify__submit(this); return false;">
+                <input type="hidden" value="${rq.loginedMemberNow.id}" name="id">
                 <table class="table w-full border_table">
                     <colgroup>
                         <col width="200" />
@@ -115,7 +116,7 @@
                                 <div class="nameModify hidden">
                                     <c:set var="name" value="${rq.loginedMemberNow.name}" />
                                     <input type="text" value="${name}" class="text-black w-[40%]" placeholder="name"
-                                        id="nameInput">
+                                        id="nameInput" name="name">
                                     <a class="btn"
                                         onclick="cancell('name'); javascript:$('#nameInput').val('${name}')">취소</a>
                                 </div>
@@ -128,7 +129,7 @@
                                 <div class="nicknameModify hidden">
                                     <c:set var="nickname" value="${rq.loginedMemberNow.nickname}" />
                                     <input type="text" value="${nickname}" class="text-black w-[40%]"
-                                        placeholder="nickname" id="nicknameInput">
+                                        placeholder="nickname" id="nicknameInput" name="nickname">
                                     <a class="btn"
                                         onclick="cancell('nickname'); javascript:$('#nicknameInput').val('${nickname}')">취소</a>
                                 </div>
@@ -141,7 +142,7 @@
                                 <div class="cellphoneNoModify hidden">
                                     <c:set var="cellphoneNo" value="${rq.loginedMemberNow.cellphoneNo}" />
                                     <input type="text" value="${cellphoneNo}" class="text-black w-[40%]"
-                                        placeholder="cellphoneNo" id="cellphoneNoInput">
+                                        placeholder="cellphoneNo" id="cellphoneNoInput" name="cellphoneNo">
                                     <a class="btn"
                                         onclick="cancell('cellphoneNo'); javascript:$('#cellphoneNoInput').val('${cellphoneNo}')">취소</a>
                                 </div>
@@ -154,7 +155,7 @@
                                 <div class="emailModify hidden">
                                     <c:set var="email" value="${rq.loginedMemberNow.email}" />
                                     <input type="text" value="${email}" class="text-black w-[40%]" placeholder="email"
-                                        id="emailInput">
+                                        id="emailInput" name="email">
                                     <a class="btn"
                                         onclick="cancell('email'); javascript:$('#emailInput').val('${email}')">취소</a>
                                 </div>
