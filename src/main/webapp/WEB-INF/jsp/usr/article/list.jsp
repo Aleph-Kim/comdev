@@ -31,7 +31,7 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th class=" !z-[-1]">번호</th>
+                            <th class="!z-[-1]">번호</th>
                             <th class="">제목</th>
                             <th class="">날짜</th>
                             <th class="">작성자</th>
@@ -42,19 +42,19 @@
                         <c:forEach var="article" items="${articles}">
                             <tr class="hover cursor-pointer"
                                 onclick="window.location.href='/usr/article/detail?id=${article.id}'">
-                                <td class=" !z-[-1]">
+                                <td class="">
                                     ${article.id}
                                 </td>
-                                <td class=" !z-[-1]">
+                                <td class="">
                                     ${article.title}
                                 </td>
-                                <td class=" !z-[-1]">
+                                <td class="">
                                     ${article.forPrintType1RegDate}
                                 </td>
-                                <td class=" !z-[-1]">
+                                <td class="">
                                     ${article.extra__writerName}
                                 </td>
-                                <td class=" !z-[-1]">
+                                <td class="">
                                     ${article.extra__LikePoint}
                                 </td>
                             </tr>

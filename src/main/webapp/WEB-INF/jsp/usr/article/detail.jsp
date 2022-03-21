@@ -99,17 +99,15 @@
                         </tr>
                         <tr>
                             <th>좋아요</th>
-                            <td class="flex items-center">
+                            <td class="">
                                 <c:choose>
                                     <c:when test="${sessionScope.LoginedMemberId > -1 && actorCanMakeLikePoint}">
-                                        <a href="../article/doDecreaseLikePoint?articleId=${article.id}"
-                                            class="flex items-center">
+                                        <a href="../article/doDecreaseLikePoint?articleId=${article.id}" class="">
                                             <span>🧡</span>
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="../article/doIncreaseLikePoint?articleId=${article.id}"
-                                            class="flex items-center">
+                                        <a href="../article/doIncreaseLikePoint?articleId=${article.id}" class="">
                                             <span>🤍</span>
                                         </a>
                                     </c:otherwise>
@@ -138,7 +136,7 @@
                             <c:when test="${sessionScope.LoginedMemberId > -1}">
                                 <div class="flex items-center">
                                     <textarea rows="5" placeholder="댓글을 입력해주세요."
-                                        class="textarea textarea-bordered w-full min-h-[10rem] max-w-full my-2 text-xl"
+                                        class="textarea textarea-bordered w-full min-h-[10rem] max-w-full my-2 text-lg"
                                         name="body"></textarea>
                                     <button type="submit" class="btn ml-3">댓글 작성</button>
                                 </div>
@@ -179,7 +177,7 @@
                             </form>
                         </div>
                         <div
-                            class="showReply-${reply.id} text-xl flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:border">
+                            class="showReply-${reply.id} text-lg flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:border hover:bg-gray-300 hover:text-black">
                             <div class="break-all p-3 max-w-[70%]">
                                 ${reply.body}
                             </div>

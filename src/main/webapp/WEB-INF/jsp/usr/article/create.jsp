@@ -18,7 +18,7 @@
                             <tr>
                                 <th>게시판 선택</th>
                                 <td class="!p-0">
-                                    <select class="select select-bordered w-full max-w-xs bg-gray-700" name="boardId">
+                                    <select class="select select-bordered w-full max-w-xs bg-base-200" name="boardId">
                                         <option readonly selected value="-1">-------- 게시판을 선택해주세요 --------</option>
                                         <option value="1">공지사항</option>
                                         <option value="2">자유게시판</option>

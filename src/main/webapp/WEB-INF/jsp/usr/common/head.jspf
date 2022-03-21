@@ -21,14 +21,12 @@
                 integrity="sha512-0JSLdMCGjtFivjqwnLASPcDjuajA4VSHkz19z+SPyOc/b808txD2DHZut3ipkY6Zj9ncYUjT+SHynWF3rmPISA=="
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-            <!-- theme change -->
-            <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
-
             <!-- 폰트어썸 불러오기 -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
             <!-- 사이트 공통 CSS -->
             <link rel="stylesheet" href="/resource/common.css" />
+
             <!-- 사이트 공통 JS -->
             <script src="/resource/common.js" defer="defer"></script>
         </head>
@@ -36,22 +34,23 @@
         <body class="min-w-[500px]">
             <header class="navbar">
                 <div class="flex-1">
-                    <a href="/" class="btn btn-ghost nomal-case text-xl">로고</a>
+                    <a href="/" class="btn btn-ghost nomal-case text-lg font-bold">로고</a>
                 </div>
                 <div class="flex-none">
-                    <ul class="menu menu-horizontal p-0">
-                        <li><a data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">테마 변경</a></li>
-                        <li><a href="/">홈</a></li>
-                        <li><a href="/usr/article/list">공지사항</a></li>
-                        <li><a href="/usr/article/list?boardId=2">자유게시판</a></li>
-                        <c:if test="${rq.isLogined()}">
-                            <li><a href="/usr/article/Add">글 작성</a></li>
-                            <li><a href="/usr/member/myPage?id=${rq.loginedMemberId}">마이페이지</a></li>
-                            <li><a href="/usr/member/doLogout">로그아웃</a></li>
-                        </c:if>
-                        <c:if test="${rq.isLogined() == false}">
-                            <li><a href="/usr/member/login">로그인</a></li>
-                        </c:if>
+                    <a class="btn btn-ghost nomal-case text-lg" data-toggle-theme="dark,light"
+                        data-act-class="ACTIVECLASS">테마 변경</a>
+                    <a class="btn btn-ghost nomal-case text-lg" href="/">홈</a>
+                    <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/list">공지사항</a>
+                    <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/list?boardId=2">자유게시판</a>
+                    <c:if test="${rq.isLogined()}">
+                        <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/Add">글 작성</a>
+                        <a class="btn btn-ghost nomal-case text-lg"
+                            href="/usr/member/myPage?id=${rq.loginedMemberId}">마이페이지</a>
+                        <a class="btn btn-ghost nomal-case text-lg" href="/usr/member/doLogout">로그아웃</a>
+                    </c:if>
+                    <c:if test="${rq.isLogined() == false}">
+                        <a class="btn btn-ghost nomal-case text-lg" href="/usr/member/login">로그인</a>
+                    </c:if>
                     </ul>
                 </div>
             </header>

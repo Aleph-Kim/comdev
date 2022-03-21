@@ -1,29 +1,9 @@
 @font-face {
-    font-family: "LotteMartDream";
+    font-family: "MaruBuri-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff")
+        format("woff");
+    font-weight: normal;
     font-style: normal;
-    font-weight: 400;
-    src: url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2")
-            format("woff2"),
-        url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff")
-            format("woff");
-}
-@font-face {
-    font-family: "LotteMartDream";
-    font-style: normal;
-    font-weight: 700;
-    src: url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2")
-            format("woff2"),
-        url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff")
-            format("woff");
-}
-@font-face {
-    font-family: "LotteMartDream";
-    font-style: normal;
-    font-weight: 300;
-    src: url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2")
-            format("woff2"),
-        url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff")
-            format("woff");
 }
 html > body {
     font-family: "LotteMartDream", sans-serif;
@@ -33,4 +13,12 @@ html > body {
 .border_table td {
     border-width: 1px;
     border-color: #79797965;
+}
+
+.base_text_color {
+    color: hsla(var(--bc) / var(--tw-text-opacity, 1));
+}
+
+.base_bg {
+    background-color: hsla(var(--bc) / var(--tw-bg-opacity, 0.25));
 }
