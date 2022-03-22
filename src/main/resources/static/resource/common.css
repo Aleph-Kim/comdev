@@ -22,3 +22,11 @@ html > body {
 .base_bg {
     background-color: hsla(var(--bc) / var(--tw-bg-opacity, 0.25));
 }
+
+.base_border_color {
+    border-color: hsl(var(--bc) / var(--tw-border-opacity));
+}
+
+input {
+    padding-left: 1em !important;
+}

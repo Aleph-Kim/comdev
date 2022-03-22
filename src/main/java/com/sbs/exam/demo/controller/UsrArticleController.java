@@ -134,7 +134,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
+	public String doDelete(int id, int boardId) {
 		if (Ut.empty(id)) {
 			return Ut.jsHistoryBack("게시물 번호를 입력해주세요.");
 		}
@@ -146,7 +146,7 @@ public class UsrArticleController {
 		}
 		articleService.deleteArticle(id);
 
-		return rq.jsReplace(Ut.f("%d번 게시물을 삭제 했습니다.", id), "../article/list");
+		return rq.jsReplace(Ut.f("%d번 게시물을 삭제 했습니다.", id), Ut.f("../article/list?boardId=%d", boardId));
 	}
 
 	@RequestMapping("/usr/article/modify")

@@ -13,7 +13,7 @@
                                 <option value="body">내용</option>
                             </select>
                             <input type="text" name="searchKeyword" value="${param.searchKeyword}"
-                                class="bg-base-200 text-black">
+                                class="bg-base-100 border base_border_color border-opacity-20">
                             <input type="hidden" name="boardId" value="${param.boardId}">
                             <button class="btn">검색</button>
                         </div>

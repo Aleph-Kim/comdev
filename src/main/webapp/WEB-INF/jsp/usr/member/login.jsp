@@ -7,15 +7,25 @@
                     <h3 class="text-2xl font-bold text-center"></h3>
                     <form action="../member/doLogin" method="post">
                         <div class="flex flex-col justify-center py-5 px-auto">
-                            <input type="text" placeholder="Id" name="loginId"
-                                class="h-[4em] w-[30em] px-4 py-2 text-black">
-                            <input type="password" placeholder="Password" name="loginPw"
-                                class="mt-5 h-[4em] w-[30em] px-4 py-2 text-black">
+                            <div class="form-control">
+                                <label for="loginId">
+                                    <span>아이디</span>
+                                </label>
+                                <input type="text" placeholder="Id" name="loginId"
+                                    class="h-[4em] w-[30em] px-4 py-2 text-black border base_border_color border-opacity-20">
+                            </div>
+                            <div class="form-control mt-5 ">
+                                <label for="loginPw">
+                                    <span>비밀번호</span>
+                                </label>
+                                <input type="password" placeholder="Password" name="loginPw"
+                                    class="h-[4em] w-[30em] px-4 py-2 text-black border base_border_color border-opacity-20">
+                            </div>
                             <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-600 mt-5 h-[4em] w-[30em] px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                class="text-[1.1rem] text-white font-semibold bg-blue-500 hover:bg-blue-600 mt-5 h-[4rem] w-[30rem] px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600">
                                 로그인
                             </button>
-                            <div class="mt-4 flex justify-start base_text_color">
+                            <div class="mt-4 flex justify-start base_text_color font-semibold">
                                 <a class="hover:text-blue-400 mr-5" href="#">회원가입</a>
                                 <a class="hover:text-blue-400" href="#">아이디 /
                                     비밀번호 찾기</a>

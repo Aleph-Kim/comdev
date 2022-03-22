@@ -68,7 +68,6 @@ public interface ArticleRepository {
 								</otherwise>
 							</choose>
 						</if>
-						ORDER BY A.id DESC
 						<if test="limitTake > -1">
 							LIMIT #{limitStart}, #{limitTake}
 						</if>
@@ -76,6 +75,7 @@ public interface ArticleRepository {
 					LEFT JOIN likePoint AS LP
 					ON A.id = LP.relId
 					GROUP BY A.id
+					ORDER BY A.id DESC
 				</script>
 			""")
 	public List<Article> getArticles(@Param("boardId") int boardId, int limitStart,

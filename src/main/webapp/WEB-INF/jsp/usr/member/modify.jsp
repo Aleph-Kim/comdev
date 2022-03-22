@@ -14,18 +14,11 @@
 
                     form.newPassword.value = form.newPassword.value.trim();
 
-                    if (form.newPassword.value.length > 0) {
+                    if (form.newPassword.value.length > 0 && form.newPasswordCheck.value.length != 0) {
                         form.newPasswordCheck.value = form.newPasswordCheck.value.trim();
 
-                        if (form.newPasswordCheck.value.length == 0) {
-                            alert('비밀번호확인을 입력해주세요.');
-                            form.newPasswordCheck.focus();
-
-                            return;
-                        }
-
                         if (form.newPassword.value != form.newPasswordCheck.value) {
-                            alert('비밀번호확인이 일치하지 않습니다.');
+                            alert('비밀번호 확인이 일치하지 않습니다.');
                             form.newPasswordCheck.focus();
 
                             return;
@@ -96,14 +89,16 @@
                         <tr class="passwordModify hidden">
                             <th>새 비밀번호</th>
                             <td>
-                                <input type="password" class="text-black w-[40%] newPasswordInput"
+                                <input type="password"
+                                    class="text-black w-[40%] h-12 border base_border_color border-opacity-20 newPasswordInput"
                                     placeholder="new password" name="newPassword">
                             </td>
                         </tr>
                         <tr class="passwordModify hidden">
                             <th>비밀번호 확인</th>
                             <td>
-                                <input type="password" class="text-black w-[40%] newPasswordInput"
+                                <input type="password"
+                                    class="text-black w-[40%] h-12 border base_border_color border-opacity-20 newPasswordInput"
                                     placeholder="password check" name="newPasswordCheck">
                                 <a class="btn"
                                     onclick="cancell('password'); javascript:$('.newPasswordInput').val('')">취소</a>
@@ -115,8 +110,9 @@
                                 <a class="btn nameModifyBtn" onclick="modify('name')">변경하기</a>
                                 <div class="nameModify hidden">
                                     <c:set var="name" value="${rq.loginedMemberNow.name}" />
-                                    <input type="text" value="${name}" class="text-black w-[40%]" placeholder="name"
-                                        id="nameInput" name="name">
+                                    <input type="text" value="${name}"
+                                        class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
+                                        placeholder="name" id="nameInput" name="name">
                                     <a class="btn"
                                         onclick="cancell('name'); javascript:$('#nameInput').val('${name}')">취소</a>
                                 </div>
@@ -128,7 +124,8 @@
                                 <a class="btn nicknameModifyBtn" onclick="modify('nickname')">변경하기</a>
                                 <div class="nicknameModify hidden">
                                     <c:set var="nickname" value="${rq.loginedMemberNow.nickname}" />
-                                    <input type="text" value="${nickname}" class="text-black w-[40%]"
+                                    <input type="text" value="${nickname}"
+                                        class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
                                         placeholder="nickname" id="nicknameInput" name="nickname">
                                     <a class="btn"
                                         onclick="cancell('nickname'); javascript:$('#nicknameInput').val('${nickname}')">취소</a>
@@ -141,7 +138,8 @@
                                 <a class="btn cellphoneNoModifyBtn" onclick="modify('cellphoneNo')">변경하기</a>
                                 <div class="cellphoneNoModify hidden">
                                     <c:set var="cellphoneNo" value="${rq.loginedMemberNow.cellphoneNo}" />
-                                    <input type="text" value="${cellphoneNo}" class="text-black w-[40%]"
+                                    <input type="text" value="${cellphoneNo}"
+                                        class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
                                         placeholder="cellphoneNo" id="cellphoneNoInput" name="cellphoneNo">
                                     <a class="btn"
                                         onclick="cancell('cellphoneNo'); javascript:$('#cellphoneNoInput').val('${cellphoneNo}')">취소</a>
@@ -154,8 +152,9 @@
                                 <a class="btn emailModifyBtn" onclick="modify('email')">변경하기</a>
                                 <div class="emailModify hidden">
                                     <c:set var="email" value="${rq.loginedMemberNow.email}" />
-                                    <input type="text" value="${email}" class="text-black w-[40%]" placeholder="email"
-                                        id="emailInput" name="email">
+                                    <input type="text" value="${email}"
+                                        class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
+                                        placeholder="email" id="emailInput" name="email">
                                     <a class="btn"
                                         onclick="cancell('email'); javascript:$('#emailInput').val('${email}')">취소</a>
                                 </div>
@@ -164,7 +163,7 @@
                     </tbody>
                 </table>
                 <div class="mt-4 flex justify-end">
-                    <input type="submit" class="btn mr-3" value="수정완료" />
+                    <input type="submit" class="btn mr-3 bg-gray-700" value="수정완료" />
                     <a href="javascript:history.back()" class="btn">뒤로가기</a>
                 </div>
             </form>

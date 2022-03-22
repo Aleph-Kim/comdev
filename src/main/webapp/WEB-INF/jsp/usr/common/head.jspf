@@ -29,6 +29,8 @@
 
             <!-- 사이트 공통 JS -->
             <script src="/resource/common.js" defer="defer"></script>
+
+            <!-- 다크 / 라이트 모드를 위한 쿼리 -->
             <script>
 
                 let theme = localStorage.getItem('data-theme');
