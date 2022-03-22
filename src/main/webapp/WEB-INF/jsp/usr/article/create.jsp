@@ -5,6 +5,7 @@
         <%@ include file="../common/head.jspf" %>
             <%@ include file="../../common/toastUiEditorLib.jspf" %>
                 <script>
+
                     let submitWriteFormDone = false;
 
                     function submitWriteForm(form) {
@@ -69,7 +70,7 @@
                                 <tr>
                                     <th>게시물 내용</th>
                                     <td class="!p-0">
-                                        <div class="toast-ui-editor">
+                                        <div class="toast-ui-editor bg-gray-300">
                                             <script type="text/x-template"></script>
                                         </div>
                                     </td>

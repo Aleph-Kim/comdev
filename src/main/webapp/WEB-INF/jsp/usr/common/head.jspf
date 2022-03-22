@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <!DOCTYPE html>
-        <html lang="ko">
+        <html lang="ko" data-theme="dark">
 
         <head>
             <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
 
             <!-- 테일윈드 불러오기 -->
             <!-- 노말라이즈, 라이브러리까지 한방에 해결 -->
-            <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+            <script src="https://cdn.tailwindcss.com"></script>
 
             <!-- daisy ui -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/2.0.9/full.css"
@@ -29,6 +29,28 @@
 
             <!-- 사이트 공통 JS -->
             <script src="/resource/common.js" defer="defer"></script>
+            <script>
+
+                let theme = localStorage.getItem('data-theme');
+
+                $('html').attr('data-theme', theme);
+
+                function themeChange() {
+
+                    if ($('html').attr('data-theme') == 'dark') {
+                        $('html').attr('data-theme', 'light');
+                        localStorage.setItem('data-theme', 'light');
+                        return;
+                    };
+
+                    if ($('html').attr('data-theme') == 'light') {
+                        $('html').attr('data-theme', 'dark');
+                        localStorage.setItem('data-theme', 'dark');
+                        return;
+                    };
+                };
+
+            </script>
         </head>
 
         <body class="min-w-[500px]">
@@ -37,8 +59,7 @@
                     <a href="/" class="btn btn-ghost nomal-case text-lg font-bold">로고</a>
                 </div>
                 <div class="flex-none">
-                    <a class="btn btn-ghost nomal-case text-lg" data-toggle-theme="dark,light"
-                        data-act-class="ACTIVECLASS">테마 변경</a>
+                    <button class="btn btn-ghost nomal-case text-lg" onclick="themeChange()">테마 변경</button>
                     <a class="btn btn-ghost nomal-case text-lg" href="/">홈</a>
                     <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/list">공지사항</a>
                     <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/list?boardId=2">자유게시판</a>
