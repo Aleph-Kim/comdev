@@ -55,7 +55,7 @@ public class Ut {
                 """, msg, uri);
     }
 
-    public static String getUriEndcoded(String str) {
+    public static String getUriEncoded(String str) {
         try {
             return URLEncoder.encode(str, "UTF-8");
         } catch (Exception e) {

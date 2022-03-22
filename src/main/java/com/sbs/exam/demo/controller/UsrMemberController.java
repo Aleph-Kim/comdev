@@ -11,6 +11,7 @@ import com.sbs.exam.demo.vo.Rq;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -61,7 +62,7 @@ public class UsrMemberController {
 
     @RequestMapping("/usr/member/doLogin")
     @ResponseBody
-    public String doLogin(String loginId, String loginPw) {
+    public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
         if (rq.isLogined()) {
             return Ut.jsHistoryBack("이미 로그인 되어있습니다.");
         }
@@ -83,7 +84,7 @@ public class UsrMemberController {
 
         rq.login(member);
 
-        return Ut.jsReplace(Ut.f("환영합니다 <%s>님", member.getNickname()), "/");
+        return Ut.jsReplace(Ut.f("환영합니다 <%s>님", member.getNickname()), afterLoginUri);
     }
 
     @RequestMapping("/usr/member/doLogout")

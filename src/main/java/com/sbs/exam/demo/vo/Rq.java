@@ -55,11 +55,14 @@ public class Rq {
         this.req.setAttribute("rq", this);
     }
 
+    public void printReplaceJs(String msg, String uri) {
+        resp.setContentType("text/html; charset=UTF-8");
+        print(Ut.jsReplace(msg, uri));
+    }
+
     public void printHistoryBackJs(String msg) {
         resp.setContentType("text/html; charset=UTF-8");
-
         print(Ut.jsHistoryBack(msg));
-
     }
 
     private void print(String str) {
@@ -102,4 +105,22 @@ public class Rq {
     public void initOnBeforeActionInterceptor() {
     }
 
+    public String getCurrentUri() {
+        String currentUri = req.getRequestURI();
+        String queryString = req.getQueryString();
+
+        if (queryString != null && queryString.length() > 0) {
+            currentUri += "?" + queryString;
+        }
+
+        return currentUri;
+    }
+
+    public String getEncodedCurrentUri() {
+        return Ut.getUriEncoded(getCurrentUri());
+    }
+
+    public String getAfterLogoutUri() {
+        return getEncodedCurrentUri();
+    }
 }
