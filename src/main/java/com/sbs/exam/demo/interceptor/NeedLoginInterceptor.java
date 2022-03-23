@@ -20,7 +20,7 @@ public class NeedLoginInterceptor implements HandlerInterceptor {
 
             String afterLoginUri = rq.getEncodedCurrentUri();
 
-            rq.printReplaceJs("로그인 후 이용해주세요.", "../member/login?afterLoginUri" + afterLoginUri);
+            rq.printReplaceJs("로그인 후 이용해주세요.", "../member/login?afterLoginUri=" + afterLoginUri);
             return false;
         }
 

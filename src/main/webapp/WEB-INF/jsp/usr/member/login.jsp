@@ -9,7 +9,6 @@
                         <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}">
                         <div class="flex flex-col justify-center py-5 px-auto">
                             <div class="form-control">
-                                <div class="w-10 bg-white">qwe${param.afterLoginUri}</div>
                                 <label for="loginId">
                                     <span>아이디</span>
                                 </label>

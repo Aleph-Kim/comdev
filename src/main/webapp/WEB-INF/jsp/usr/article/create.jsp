@@ -70,7 +70,7 @@
                                 <tr>
                                     <th>게시물 내용</th>
                                     <td class="!p-0">
-                                        <div class="toast-ui-editor bg-gray-300">
+                                        <div class="toast-ui-editor bg-white/50 rounded-none">
                                             <script type="text/x-template"></script>
                                         </div>
                                     </td>
@@ -79,7 +79,7 @@
                         </table>
                     </div>
                     <div class="flex justify-end mt-2">
-                        <button class="btn mx-2 bg-gray-700" type="submit">생성</button>
+                        <button class="btn mx-2">생성</button>
                         <button class="btn" onclick="history.back();">취소</button>
                     </div>
                 </form>

@@ -68,6 +68,7 @@
 
             <form action="../member/doModify" method="POST" onsubmit="MemberModify__submit(this); return false;">
                 <input type="hidden" value="${rq.loginedMemberNow.id}" name="id">
+                <input type="hidden" value="${rq.loginedMemberNow.loginId}">
                 <table class="table w-full border_table">
                     <colgroup>
                         <col width="200" />
@@ -76,8 +77,7 @@
                         <tr>
                             <th>아이디</th>
                             <td>
-                                <input type="text" value="${rq.loginedMemberNow.loginId}"
-                                    class="text-black disabled:opacity-75 w-[40%]" disabled>
+                                ${rq.loginedMemberNow.loginId}
                             </td>
                         </tr>
                         <tr class="passwordModifyBtn">
@@ -163,7 +163,7 @@
                     </tbody>
                 </table>
                 <div class="mt-4 flex justify-end">
-                    <input type="submit" class="btn mr-3 bg-gray-700" value="수정완료" />
+                    <button class="btn mr-3">수정완료</button>
                     <a href="javascript:history.back()" class="btn">뒤로가기</a>
                 </div>
             </form>
