@@ -2,7 +2,7 @@
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="pageTitle" value="회원가입" />
         <%@ include file="../common/head.jspf" %>
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
             <script>
                 let MemberJoin__submitDone = false;
@@ -97,11 +97,15 @@
                 }
 
                 function checkLoginIdDup(el) {
-                    $('.loginId-message').empty();
+
                     const form = $(el).closest('form').get(0);
 
                     if (form.loginId.value.length == 0) {
                         validLoginId = '';
+                        return;
+                    }
+
+                    if (validLoginId == form.loginId.value) {
                         return;
                     }
 
@@ -110,13 +114,15 @@
                         loginId: form.loginId.value
                     }, function (data) {
                         $('.loginId-message').html('<div class="mt-2">' + data.msg + '</div>');
-                        if (data.succsess) {
+                        if (data.success) {
                             validLoginId = data.data1;
                         } else {
                             validLoginId = '';
                         }
                     }, 'json');
                 }
+
+                const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 300)
 
             </script>
 
@@ -131,7 +137,7 @@
                             <td>
                                 <input type="text"
                                     class="inline-block text-black w-[40%] h-12 border base_border_color border-opacity-20"
-                                    placeholder="new id" name="loginId" onkeyup="checkLoginIdDup(this);"
+                                    placeholder="new id" name="loginId" onkeyup="checkLoginIdDupDebounced(this);"
                                     autocomplete="off">
                                 <div class="loginId-message inline-block ml-3"></div>
                             </td>
