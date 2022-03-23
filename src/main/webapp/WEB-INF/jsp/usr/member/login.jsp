@@ -27,7 +27,7 @@
                                 로그인
                             </button>
                             <div class="mt-4 flex justify-start base_text_color font-semibold">
-                                <a class="hover:text-blue-400 mr-5" href="#">회원가입</a>
+                                <a class="hover:text-blue-400 mr-5" href="../member/join">회원가입</a>
                                 <a class="hover:text-blue-400" href="#">아이디 /
                                     비밀번호 찾기</a>
                             </div>

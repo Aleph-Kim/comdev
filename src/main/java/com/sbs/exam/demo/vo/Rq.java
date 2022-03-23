@@ -1,6 +1,7 @@
 package com.sbs.exam.demo.vo;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,12 +32,15 @@ public class Rq {
     private HttpServletRequest req;
     private HttpServletResponse resp;
     private HttpSession httpSession;
+    private Map<String, String> paramMap;
 
     public Rq(HttpServletRequest req, HttpServletResponse resp, Rq rq, MemberService memberService) {
         this.req = req;
         this.resp = resp;
+
+        paramMap = Ut.getParamMap(req);
+
         this.httpSession = this.req.getSession();
-        this.req.setAttribute("rq", this);
 
         boolean isLogined = false;
         int loginedMemberId = 0;
@@ -52,7 +56,6 @@ public class Rq {
         this.loginedMemberId = loginedMemberId;
         this.loginedMemberNow = loginedMemberNow;
 
-        this.req.setAttribute("rq", this);
     }
 
     public void printReplaceJs(String msg, String uri) {
@@ -101,10 +104,6 @@ public class Rq {
         return Ut.jsReplace(msg, uri);
     }
 
-    // Rq 객체가 자연스럽게 생성되도록 유도하는 역할
-    public void initOnBeforeActionInterceptor() {
-    }
-
     public String getCurrentUri() {
         String currentUri = req.getRequestURI();
         String queryString = req.getQueryString();
@@ -120,7 +119,38 @@ public class Rq {
         return Ut.getUriEncoded(getCurrentUri());
     }
 
+    public String getAfterLoginUri() {
+        String requestUri = req.getRequestURI();
+
+        switch (requestUri) {
+            case "/usr/member/login":
+            case "/usr/member/join":
+            case "/usr/member/findLoginId":
+            case "/usr/member/findLoginPw":
+                return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
+        }
+
+        return getEncodedCurrentUri();
+    }
+
     public String getAfterLogoutUri() {
         return getEncodedCurrentUri();
+    }
+
+    public String getLoginUri() {
+        return "../member/login?afterLoginUri=" + getAfterLoginUri();
+    }
+
+    public String getLogoutUri() {
+        String requestUri = req.getRequestURI();
+
+        switch (requestUri) {
+            case "/usr/article/Add":
+                return "../member/doLogout";
+            case "/usr/article/doAdd":
+                return "../member/doLogout";
+        }
+
+        return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
     }
 }

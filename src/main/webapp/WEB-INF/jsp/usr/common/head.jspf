@@ -63,16 +63,19 @@
                 <div class="flex-none">
                     <button class="btn btn-ghost nomal-case text-lg" onclick="themeChange()">테마 변경</button>
                     <a class="btn btn-ghost nomal-case text-lg" href="/">홈</a>
-                    <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/list">공지사항</a>
-                    <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/list?boardId=2">자유게시판</a>
+                    <select class="select select-ghost nomal-case text-lg ml-3">
+                        <option disabled selected>게시판</option>
+                        <option onclick="location.href='/usr/article/list'">공지사항</option>
+                        <option onclick="location.href='/usr/article/list?boardId=2'">자유게시판</option>
+                    </select>
                     <c:if test="${rq.isLogined()}">
                         <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/Add">글 작성</a>
                         <a class="btn btn-ghost nomal-case text-lg"
                             href="/usr/member/myPage?id=${rq.loginedMemberId}">마이페이지</a>
-                        <a class="btn btn-ghost nomal-case text-lg" href="/usr/member/doLogout">로그아웃</a>
+                        <a class="btn btn-ghost nomal-case text-lg" href="${rq.logoutUri}">로그아웃</a>
                     </c:if>
                     <c:if test="${rq.isLogined() == false}">
-                        <a class="btn btn-ghost nomal-case text-lg" href="/usr/member/login">로그인</a>
+                        <a class="btn btn-ghost nomal-case text-lg" href="${rq.loginUri}">로그인</a>
                     </c:if>
                     </ul>
                 </div>

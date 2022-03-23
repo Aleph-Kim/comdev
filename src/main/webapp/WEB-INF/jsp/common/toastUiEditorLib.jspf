@@ -92,6 +92,23 @@
             padding-top: calc(100% / 1 * 2);
         }
 
+        /* toast Ui viewer 커스텀 */
+        .toastui-editor-contents p {
+
+            font-size: medium;
+            color: hsla(var(--bc) / var(--tw-text-opacity, 1)) !important;
+        }
+
+        .toastui-editor-contents h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: hsla(var(--bc) / var(--tw-text-opacity, 1)) !important;
+        }
+
+
         /* 토스트 UI, 유튜브 플러그인 에서 필요한 CSS 끝 */
     </style>
 

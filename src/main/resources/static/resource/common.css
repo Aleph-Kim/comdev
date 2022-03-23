@@ -49,6 +49,7 @@ html > body .toastui-editor-md-code-block {
     font-family: "NanumBarunGothic", sans-serif;
     font-weight: 400;
     text-underline-position: under;
+    color: hsla(var(--bc) / var(--tw-text-opacity, 1));
 }
 
 html > body .toastui-editor-contents {
@@ -62,7 +63,7 @@ html > body .toastui-editor-contents {
 }
 
 .base_text_color {
-    color: hsla(var(--bc) / var(--tw-text-opacity, 1));
+    color: hsla(var(--bc) / var(--tw-text-opacity, 1)) !important;
 }
 
 .base_bg {

@@ -29,9 +29,17 @@ public class UsrMemberController {
     @ResponseBody
     public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
             String email) {
+
         if (Ut.empty(loginId)) {
             return Ut.jsHistoryBack("아이디를 입력해주세요.");
         }
+
+        Member oldMember = memberService.SearchUserLoginId(loginId);
+
+        if (oldMember != null) {
+            return Ut.jsHistoryBack("이미 존재하는 아이디 입니다.");
+        }
+
         if (Ut.empty(loginPw)) {
             return Ut.jsHistoryBack("비밀번호를 입력해주세요.");
         }
@@ -52,7 +60,31 @@ public class UsrMemberController {
         }
 
         ResultData.newData(joinRd, member);
+
+        rq.login(member);
+
         return Ut.jsReplace(Ut.f("환영합니다. %s님!", member.getNickname()), "/");
+    }
+
+    @RequestMapping("/usr/member/getLoginIdDup")
+    @ResponseBody
+    public ResultData getLoginIdDup(String loginId) {
+        if (Ut.empty(loginId)) {
+            return ResultData.from("F-A1", "loginId를 입력해주세요.");
+        }
+
+        Member oldMember = memberService.SearchUserLoginId(loginId);
+
+        if (oldMember != null) {
+            return ResultData.from("F-A2", "이미 사용중인 아이디입니다..", "loginId", loginId);
+        }
+
+        return ResultData.from("S-1", "사용가능한 아이디 입니다.", "loginId", loginId);
+    }
+
+    @RequestMapping("/usr/member/join")
+    public String showJoin(HttpSession httpSession) {
+        return "/usr/member/join";
     }
 
     @RequestMapping("/usr/member/login")
@@ -89,14 +121,14 @@ public class UsrMemberController {
 
     @RequestMapping("/usr/member/doLogout")
     @ResponseBody
-    public String doLogout() {
+    public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
         if (!rq.isLogined()) {
             return Ut.jsHistoryBack("로그인 후 이용해주세요.");
         }
 
         rq.logout();
 
-        return Ut.jsReplace("정상적으로 로그아웃 되었습니다.", "../member/login");
+        return Ut.jsReplace("정상적으로 로그아웃 되었습니다.", afterLogoutUri);
     }
 
     @RequestMapping("/usr/member/myPage")
