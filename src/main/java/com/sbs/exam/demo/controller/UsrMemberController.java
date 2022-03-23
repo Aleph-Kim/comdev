@@ -76,7 +76,7 @@ public class UsrMemberController {
         Member oldMember = memberService.SearchUserLoginId(loginId);
 
         if (oldMember != null) {
-            return ResultData.from("F-A2", "이미 사용중인 아이디입니다..", "loginId", loginId);
+            return ResultData.from("F-A2", "이미 사용중인 아이디입니다.", "loginId", loginId);
         }
 
         return ResultData.from("S-1", "사용가능한 아이디 입니다.", "loginId", loginId);

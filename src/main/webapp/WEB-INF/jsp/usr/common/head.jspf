@@ -61,13 +61,13 @@
                     <a href="/" class="btn btn-ghost nomal-case text-lg font-bold">로고</a>
                 </div>
                 <div class="flex-none">
-                    <button class="btn btn-ghost nomal-case text-lg" onclick="themeChange()">테마 변경</button>
                     <a class="btn btn-ghost nomal-case text-lg" href="/">홈</a>
-                    <select class="select select-ghost nomal-case text-lg ml-3">
+                    <select class="select select-ghost nomal-case text-lg ml-3 w-[7rem]">
                         <option disabled selected>게시판</option>
                         <option onclick="location.href='/usr/article/list'">공지사항</option>
                         <option onclick="location.href='/usr/article/list?boardId=2'">자유게시판</option>
                     </select>
+                    <button class="btn btn-ghost nomal-case text-lg" onclick="themeChange()">테마 변경</button>
                     <c:if test="${rq.isLogined()}">
                         <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/Add">글 작성</a>
                         <a class="btn btn-ghost nomal-case text-lg"
@@ -77,7 +77,6 @@
                     <c:if test="${rq.isLogined() == false}">
                         <a class="btn btn-ghost nomal-case text-lg" href="${rq.loginUri}">로그인</a>
                     </c:if>
-                    </ul>
                 </div>
             </header>
             <hr />

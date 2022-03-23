@@ -24,7 +24,7 @@
                     }
 
                     if (form.loginId.value != validLoginId) {
-                        alert("아이디 중복확인을 해주세요.");
+                        alert("사용할 수 없는 아이디입니다.");
                         form.loginId.focus();
                         return;
                     }
@@ -97,7 +97,8 @@
                 }
 
                 function checkLoginIdDup(el) {
-                    $('.login-message').empty();
+                    $('.loginId-message').empty();
+                    const form = $(el).closest('form').get(0);
 
                     if (form.loginId.value.length == 0) {
                         validLoginId = '';
@@ -106,9 +107,9 @@
 
                     $.get('../member/getLoginIdDup', {
                         isAjax: 'Y',
-                        loginId: el.loginId.value
+                        loginId: form.loginId.value
                     }, function (data) {
-                        $('.login-message').html('<div class="mt-2">' + data.msg + '</div>');
+                        $('.loginId-message').html('<div class="mt-2">' + data.msg + '</div>');
                         if (data.succsess) {
                             validLoginId = data.data1;
                         } else {
@@ -116,6 +117,7 @@
                         }
                     }, 'json');
                 }
+
             </script>
 
             <form action="../member/doJoin" method="POST" onsubmit="MemberJoin__submit(this); return false;">
@@ -128,10 +130,10 @@
                             <th>아이디</th>
                             <td>
                                 <input type="text"
-                                    class="text-black w-[40%] h-12 border base_border_color border-opacity-20"
-                                    placeholder="new id" name="loginId">
-                                <div class="loginId-message"></div>
-                                <a class="btn ml-2" onclick="checkLoginIdDup('qwe')">중복 확인</a>
+                                    class="inline-block text-black w-[40%] h-12 border base_border_color border-opacity-20"
+                                    placeholder="new id" name="loginId" onkeyup="checkLoginIdDup(this);"
+                                    autocomplete="off">
+                                <div class="loginId-message inline-block ml-3"></div>
                             </td>
                         </tr>
                         <tr>
