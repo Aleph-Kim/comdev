@@ -24,6 +24,9 @@ public class Rq {
     private boolean isLogined;
 
     @Getter
+    private boolean isAjax;
+
+    @Getter
     private int loginedMemberId;
 
     @Getter
@@ -55,6 +58,27 @@ public class Rq {
         this.isLogined = isLogined;
         this.loginedMemberId = loginedMemberId;
         this.loginedMemberNow = loginedMemberNow;
+
+        String requestUri = req.getRequestURI();
+
+        // 해당 요청이 ajax 요청인지 아닌지 체크
+        boolean isAjax = requestUri.endsWith("Ajax");
+
+        if (isAjax == false) {
+            if (paramMap.containsKey("ajax") && paramMap.get("ajax").equals("Y")) {
+                isAjax = true;
+            } else if (paramMap.containsKey("isAjax") && paramMap.get("isAjax").equals("Y")) {
+                isAjax = true;
+            }
+        }
+
+        if (isAjax == false) {
+            if (requestUri.contains("/get")) {
+                isAjax = true;
+            }
+        }
+
+        this.isAjax = isAjax;
 
     }
 
@@ -153,4 +177,5 @@ public class Rq {
 
         return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
     }
+
 }
