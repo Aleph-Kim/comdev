@@ -1,44 +1,9 @@
 @font-face {
-    font-family: "NanumBarunGothic";
+    font-family: "D2Coding";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff")
+        format("woff");
+    font-weight: normal;
     font-style: normal;
-    font-weight: 400;
-    src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot");
-    src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix")
-            format("embedded-opentype"),
-        url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff")
-            format("woff"),
-        url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf")
-            format("truetype");
-}
-
-@font-face {
-    font-family: "NanumBarunGothic";
-    font-style: normal;
-    font-weight: 700;
-    src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-    src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-            format("embedded-opentype"),
-        url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-            format("woff"),
-        url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-            format("truetype");
-}
-
-@font-face {
-    font-family: "NanumBarunGothic";
-    font-style: normal;
-    font-weight: 300;
-    src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot");
-    src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix")
-            format("embedded-opentype"),
-        url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff")
-            format("woff"),
-        url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf")
-            format("truetype");
-}
-
-.nanumbarungothic * {
-    font-family: "NanumBarunGothic", sans-serif;
 }
 
 html > body,
@@ -46,7 +11,7 @@ html > body .toastui-editor-contents,
 html > body .ProseMirror,
 html > body .toastui-editor-md-code,
 html > body .toastui-editor-md-code-block {
-    font-family: "NanumBarunGothic", sans-serif;
+    font-family: "D2Coding", sans-serif;
     font-weight: 400;
     text-underline-position: under;
     color: hsla(var(--bc) / var(--tw-text-opacity, 1));
@@ -76,4 +41,8 @@ html > body .toastui-editor-contents {
 
 input {
     padding-left: 1em !important;
+}
+
+.table th:first-child {
+    position: relative !important;
 }

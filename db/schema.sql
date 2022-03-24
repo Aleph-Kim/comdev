@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS comunity;
-CREATE DATABASE comunity;
-USE comunity;
+DROP DATABASE IF EXISTS comdev;
+CREATE DATABASE comdev;
+USE comdev;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
