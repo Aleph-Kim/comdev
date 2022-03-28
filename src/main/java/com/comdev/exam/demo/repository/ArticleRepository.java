@@ -19,12 +19,12 @@ public interface ArticleRepository {
 					SELECT A.*,
 					IFNULL(SUM(LP.like), 0) AS extra__LikePoint
 					FROM (
-						select A.*,
+						SELECT A.*,
 						M.nickname AS extra__writerName
-						from article AS A
+						FROM article AS A
 						LEFT JOIN `member` AS M
 						ON A.memberId = M.id
-						where A.id = #{id}
+						WHERE A.id = #{id}
 					) AS A
 					LEFT JOIN likePoint AS LP
 					ON A.id = LP.relId
@@ -108,19 +108,10 @@ public interface ArticleRepository {
 	public int getArticlesCount(@Param("boardId") int boardId, String searchKeyword, String searchKeywordType);
 
 	@Update("""
-			update article
-			set hitCount = hitCount + 1
-			where id = #{id}
+			UPDATE article
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
 			""")
 	public int increaseHitCount(int id);
 
-	@Select("""
-			<script>
-			SELECT IFNULL(SUM(LP.like), 0) AS s
-			FROM likePoint AS LP
-			WHERE Lp.relId = #{id}
-			AND Lp.memberId = #{memberId}
-			</script>
-			""")
-	public int getLikePointByMemberId(int id, int memberId);
 }

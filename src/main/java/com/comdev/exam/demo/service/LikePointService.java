@@ -21,4 +21,8 @@ public class LikePointService {
         likePointRepository.doDecreaseLikePoint(articleId, memberId);
     }
 
+    public boolean actorCanMakeLikePoint(int actorId, int id) {
+		return likePointRepository.getLikePointByMemberId(id, actorId) != 0;
+	}
+
 }

@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Update;
 public interface ReplyRepository {
 
         @Insert("""
-                        insert reply
-                        set regDate = now(),
+                        INSERT reply
+                        SET regDate = now(),
                         updateDate = now(),
                         memberId = #{memberId},
                         articleId = #{articleId},
@@ -24,12 +24,12 @@ public interface ReplyRepository {
         void addreply(String body, int articleId, int memberId);
 
         @Select("""
-                        select *,
+                        SELECT *,
                         M.nickname AS extra__writerName
-                        from reply AS R
+                        FROM reply AS R
                         LEFT JOIN `member` AS M
                         ON R.memberId = M.id
-                        where articleId = #{id}
+                        WHERE articleId = #{id}
                         """)
         List<Reply> getReplies(int id);
 
@@ -41,22 +41,22 @@ public interface ReplyRepository {
         int getReplyCount(int id);
 
         @Delete("""
-                        delete From reply
-                        where id = #{replyId}
+                        DELETE FROM reply
+                        WHERE id = #{replyId}
                         """)
         void deleteReply(int replyId);
 
         @Update("""
-                        update reply
-                        set body = #{body}
-                        where id = #{replyId}
+                        UPDATE reply
+                        SET body = #{body}
+                        WHERE id = #{replyId}
                         """)
         void modifyReply(int replyId, String body);
 
         @Select("""
                         SELECT *
-                        from reply AS R
-                        where R.id = #{replyId}
+                        FROM reply AS R
+                        WHERE R.id = #{replyId}
                         """)
         Reply getReply(int replyId);
 }

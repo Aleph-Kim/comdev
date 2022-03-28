@@ -68,7 +68,7 @@ public class UsrMemberController {
 
     @RequestMapping("/usr/member/getLoginIdDup")
     @ResponseBody
-    public ResultData getLoginIdDup(String loginId) {
+    public ResultData<String> getLoginIdDup(String loginId) {
         if (Ut.empty(loginId)) {
             return ResultData.from("F-A1", "loginId를 입력해주세요.");
         }

@@ -26,13 +26,13 @@ public interface MemberRepository {
                         @Param("nickname") String nickname, @Param("cellphoneNo") String cellphoneNo,
                         @Param("email") String email);
 
-        @Select("Select Last_Insert_Id()")
+        @Select("SELECT Last_Insert_Id()")
         public int LastInsterId();
 
-        @Select("Select * from Member where loginId = #{loginId}")
+        @Select("SELECT * FROM `member` WHERE loginId = #{loginId}")
         public Member SearchUserLoginId(@Param("loginId") String loginId);
 
-        @Select("Select * from member where id = #{id}")
+        @Select("SELECT * FROM `member` WHERE id = #{id}")
         public Member searchUserId(@Param("id") int id);
 
         @Update("""

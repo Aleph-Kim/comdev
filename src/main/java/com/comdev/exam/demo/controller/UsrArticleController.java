@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.comdev.exam.demo.service.ArticleService;
 import com.comdev.exam.demo.service.BoardService;
+import com.comdev.exam.demo.service.LikePointService;
 import com.comdev.exam.demo.service.ReplyService;
 import com.comdev.exam.demo.util.Ut;
 import com.comdev.exam.demo.vo.*;
@@ -22,13 +23,15 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
 	private ReplyService replyService;
+	private LikePointService likePointService;
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, ReplyService replyService,
+	public UsrArticleController(ArticleService articleService, BoardService boardService, ReplyService replyService, LikePointService likePointService,
 			Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
 		this.replyService = replyService;
+		this.likePointService = likePointService;
 		this.rq = rq;
 	}
 
@@ -118,7 +121,7 @@ public class UsrArticleController {
 		model.addAttribute("replies", replies);
 		model.addAttribute("replyCount", replyCount);
 
-		boolean actorCanMakeLikePoint = articleService.actorCanMakeLikePoint(rq.getLoginedMemberId(), id);
+		boolean actorCanMakeLikePoint = likePointService.actorCanMakeLikePoint(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("actorCanMakeLikePoint", actorCanMakeLikePoint);
 
