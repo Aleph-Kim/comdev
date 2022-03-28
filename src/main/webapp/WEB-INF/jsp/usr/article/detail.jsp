@@ -169,22 +169,23 @@
                         <c:set var="replyCounter" value="1" />
                         <c:forEach var="reply" items="${replies}">
                             <c:if test="${reply.memberId == rq.loginedMemberId}">
-                            <div class="modifyReply-${reply.id} hidden mt-3">
-                                <form action="../reply/doModify">
-                                    <span class="flex items-center">
-                                        <input type="hidden" name="replyId" value="${reply.id}">
-                                        <input type="hidden" name="articleId" value="${article.id}">
-                                        <textarea class="textarea textarea-bordered w-[95%]"
-                                            name="body">${reply.body}</textarea>
-                                        <div class="flex flex-col ml-3">
-                                            <button class="btn whitespace-nowrap bg-gray-700">수정</button>
-                                            <input type="button" class="modify-close-btn btn mt-1 bg-gray-700" value="취소"
-                                                onsubmit="return false;" onclick="modify_close('${reply.id}')" />
-                                        </div>
-                                    </span>
-                                </form>
-                            </div>
-                        </c:if>
+                                <div class="modifyReply-${reply.id} hidden mt-3">
+                                    <form action="../reply/doModify">
+                                        <span class="flex items-center">
+                                            <input type="hidden" name="replyId" value="${reply.id}">
+                                            <input type="hidden" name="articleId" value="${article.id}">
+                                            <textarea class="textarea textarea-bordered w-[95%]"
+                                                name="body">${reply.body}</textarea>
+                                            <div class="flex flex-col ml-3">
+                                                <button class="btn whitespace-nowrap bg-gray-700">수정</button>
+                                                <input type="button" class="modify-close-btn btn mt-1 bg-gray-700"
+                                                    value="취소" onsubmit="return false;"
+                                                    onclick="modify_close('${reply.id}')" />
+                                            </div>
+                                        </span>
+                                    </form>
+                                </div>
+                            </c:if>
                             <div
                                 class="showReply-${reply.id} text-lg flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:border hover:bg-gray-300 hover:text-black">
                                 <div class="break-all p-3 max-w-[70%]">
