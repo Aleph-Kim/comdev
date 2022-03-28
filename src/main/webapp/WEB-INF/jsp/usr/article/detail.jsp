@@ -58,7 +58,7 @@
 
                 <div class="flex flex-row-reverse mb-3">
                     <button class="btn" onclick="history.back();">뒤로가기</button>
-                    <c:if test="${article.memberId == rq.getLoginedMemberId()}">
+                    <c:if test="${article.memberId == rq.loginedMemberId}">
                         <a onclick="if (!confirm('정말 삭제하시겠습니까?')) return false;"
                             href="/usr/article/doDelete?id=${article.id}&boardId=${board.id}" class="btn mx-2">
                             삭제
@@ -102,7 +102,7 @@
                                 <th>좋아요</th>
                                 <td class="">
                                     <c:choose>
-                                        <c:when test="${sessionScope.LoginedMemberId > -1 && actorCanMakeLikePoint}">
+                                        <c:when test="${rq.loginedMemberId > -1 && actorCanMakeLikePoint}">
                                             <a href="../article/doDecreaseLikePoint?articleId=${article.id}" class="">
                                                 <span>🧡</span>
                                             </a>
@@ -140,7 +140,7 @@
                             <input type="hidden" name="articleId" value="${article.id}">
                             <div class="text-[1.3rem]">댓글 작성</div>
                             <c:choose>
-                                <c:when test="${sessionScope.LoginedMemberId > -1}">
+                                <c:when test="${rq.loginedMemberId > -1}">
                                     <div class="flex items-center">
                                         <textarea rows="5" placeholder="댓글을 입력해주세요."
                                             class="textarea textarea-bordered w-full min-h-[10rem] max-w-full my-2 text-lg"
@@ -168,7 +168,8 @@
                         </c:if>
                         <c:set var="replyCounter" value="1" />
                         <c:forEach var="reply" items="${replies}">
-                            <div class="modifyReply-${reply.id} hidden">
+                            <c:if test="${reply.memberId == rq.loginedMemberId}">
+                            <div class="modifyReply-${reply.id} hidden mt-3">
                                 <form action="../reply/doModify">
                                     <span class="flex items-center">
                                         <input type="hidden" name="replyId" value="${reply.id}">
@@ -176,13 +177,14 @@
                                         <textarea class="textarea textarea-bordered w-[95%]"
                                             name="body">${reply.body}</textarea>
                                         <div class="flex flex-col ml-3">
-                                            <button class="btn">수정</button>
-                                            <input type="button" class="modify-close-btn btn mt-2" value="취소"
+                                            <button class="btn whitespace-nowrap bg-gray-700">수정</button>
+                                            <input type="button" class="modify-close-btn btn mt-1 bg-gray-700" value="취소"
                                                 onsubmit="return false;" onclick="modify_close('${reply.id}')" />
                                         </div>
                                     </span>
                                 </form>
                             </div>
+                        </c:if>
                             <div
                                 class="showReply-${reply.id} text-lg flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:border hover:bg-gray-300 hover:text-black">
                                 <div class="break-all p-3 max-w-[70%]">
@@ -195,7 +197,7 @@
                                     <span class="flex items-center h-full p-5">
                                         ${reply.forPrintType1RegDate}
                                     </span>
-                                    <c:if test="${article.memberId == sessionScope.LoginedMember.id}">
+                                    <c:if test="${reply.memberId == rq.loginedMemberId}">
                                         <button class="btn mx-3" onclick="reply_modify('${reply.id}')">
                                             수정
                                         </button>
@@ -211,7 +213,7 @@
                 </div>
                 <div class="flex justify-center mt-5">
                     <c:choose>
-                        <c:when test="${sessionScope.LoginedMemberId > -1 && actorCanMakeLikePoint}">
+                        <c:when test="${rq.loginedMemberId > -1 && actorCanMakeLikePoint}">
                             <a href="../article/doDecreaseLikePoint?articleId=${article.id}" class="flex items-center">
                                 <span>좋아요</span>
                                 <span class="text-[3rem] mb-1">🧡</span>

@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 public interface LikePointRepository {
 
         @Insert("""
-                        INSET INTO likePoint
+                        INSERT INTO likePoint
                         SET regDate = now(),
                         updateDate = now(),
                         memberId = #{memberId},
