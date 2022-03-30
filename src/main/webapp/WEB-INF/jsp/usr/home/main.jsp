@@ -42,6 +42,8 @@
                         <option disabled selected>게시판</option>
                         <option onclick="location.href='/usr/article/list'">공지사항</option>
                         <option onclick="location.href='/usr/article/list?boardId=2'">자유게시판</option>
+                        <option onclick="location.href='/usr/article/list?boardId=3'">팁 게시판</option>
+                        <option onclick="location.href='/usr/article/list?boardId=4'">테크 게시판</option>
                     </select>
                     <c:if test="${rq.isLogined()}">
                         <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/Add">글 작성</a>

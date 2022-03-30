@@ -191,3 +191,16 @@ INSERT INTO reply
 )
 SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('내용 ', RAND())
 FROM reply;
+
+# board 테스트 데이터 추가
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'tip',
+`name` = '팁 게시판';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'tech',
+`name` = '테크 게시판';
