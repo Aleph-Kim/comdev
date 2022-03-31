@@ -5,7 +5,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
+html,
 html > body,
 html > body .toastui-editor-contents,
 html > body .ProseMirror,
