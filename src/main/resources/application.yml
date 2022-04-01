@@ -1,45 +1,44 @@
 spring:
-    profiles:
-        active: local # 기본적으로 local이 선택된다는 뜻
-    mvc:
-        view:
-            prefix: /WEB-INF/jsp/
-            suffix: .jsp
-    datasource:
-        # driver-class-name: com.mysql.cj.jdbc.Driver
-        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-        url: jdbc:log4jdbc:mysql://127.0.0.1:3306/comdev?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
-        username: root
-        password: 1r4q2e3w
-mybatis:
-    type-aliases-package: com.comdev.exam.demo.vo
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/comdev?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: root
+    password:
+  type-aliases-package: com.comdev.exam.demo.vo
 custom:
-    logging:
-        dir: log
-        level: debug
+  logging:
+    dir: log
+    level: debug
 
 ---
 spring:
-    config:
-        activate:
-            on-profile: local
+  config:
+    activate:
+      on-profile: local
 server:
-    port: 8011
+  port: 8011
 
 ---
 spring:
-    config:
-        activate:
-            on-profile: production
-    servlet:
-        multipart:
-            location: /tmp
-    datasource:
-        username: kimchi
-        password: Dktjdej12!!
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://172.17.0.1:3306/comdev_production?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+  config:
+    activate:
+      on-profile: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:
+    username: kimchi
+    password: Dktjdej12!!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.17.0.1:3306/comdev_production?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
 custom:
-    logging:
-        dir: /tmp/comdev-log
-        level: info
+  logging:
+    dir: /tmp/comdev-log
+    level: info
