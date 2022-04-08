@@ -18,7 +18,7 @@
                                 <th>비밀번호</th>
                                 <td>
                                     <a href="../member/passwordCheck?replaceUri=${Ut.getUriEncoded('../member/modify')}"
-                                        class="btn">비밀번호 변경</a>
+                                        class="btn point_bg ">비밀번호 변경</a>
                                 </td>
                             </tr>
                             <tr>
@@ -35,8 +35,8 @@
                     </table>
                     <div class="flex justify-end mt-3">
                         <a href="../member/passwordCheck?replaceUri=${Ut.getUriEncoded('../member/modify')}"
-                            class="btn">회원정보 수정</a>
-                        <button class="btn ml-4" onclick="history.back();">뒤로가기</button>
+                            class="btn point_bg ">회원정보 수정</a>
+                        <button class="btn point_bg  ml-4" onclick="history.back();">뒤로가기</button>
                     </div>
                 </div>
                 <%@ include file="../common/foot.jspf" %>

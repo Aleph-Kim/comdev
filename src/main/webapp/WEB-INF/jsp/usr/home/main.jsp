@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <!DOCTYPE html>
-        <html lang="ko" data-theme="light">
+        <html lang="ko" data-theme="emerald">
 
         <head>
             <meta charset="UTF-8" />
@@ -35,32 +35,40 @@
         <body class="min-w-[800px] h-screen inset-0 text-white">
             <header class="fixed navbar">
                 <div class="flex-1">
-                    <a href="/" class="btn btn-ghost nomal-case text-lg font-bold">COM - Dev</a>
+                    <a href="/" class="btn btn-ghost nomal-case text-lg font-bold text-[#07553B]">COM - Dev</a>
                 </div>
-                <div class="flex-none">
-                    <a class="btn btn-ghost nomal-case text-lg" href="/">홈</a>
-                    <%@ include file="../../common/board_select.jspf" %>
-                        <c:if test="${rq.isLogined()}">
-                            <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/Add">글 작성</a>
-                            <a class="btn btn-ghost nomal-case text-lg"
-                                href="/usr/member/myPage?id=${rq.loginedMemberId}">마이페이지</a>
-                            <a class="btn btn-ghost nomal-case text-lg" href="${rq.logoutUri}">로그아웃</a>
-                        </c:if>
-                        <c:if test="${rq.isLogined() == false}">
-                            <a class="btn btn-ghost nomal-case text-lg" href="${rq.loginUri}">로그인</a>
-                        </c:if>
+                <div class="flex-none text-[#CED46A]">
+                    <a class="btn btn-ghost nomal-case text-lg " href="/">홈</a>
+                    <div class="dropdown dropdown-hover text-lg point_color">
+                        <label tabindex="0" class="btn btn-ghost text-lg rounded-btn">게시판</label>
+                        <ul tabindex="0" class="dropdown-content menu p-2 bg-[#d3d3d390] rounded-box w-52">
+                            <li><a href="/usr/article/list?boardId=1">공지 게시판</a></li>
+                            <li><a href="/usr/article/list?boardId=1">자유 게시판</a></li>
+                            <li><a href="/usr/article/list?boardId=1">팁 게시판</a></li>
+                            <li><a href="/usr/article/list?boardId=1">테크 게시판</a></li>
+                        </ul>
+                    </div>
+                    <c:if test="${rq.isLogined()}">
+                        <a class="btn btn-ghost nomal-case text-lg" href="/usr/article/Add">글 작성</a>
+                        <a class="btn btn-ghost nomal-case text-lg"
+                            href="/usr/member/myPage?id=${rq.loginedMemberId}">마이페이지</a>
+                        <a class="btn btn-ghost nomal-case text-lg" href="${rq.logoutUri}">로그아웃</a>
+                    </c:if>
+                    <c:if test="${rq.isLogined() == false}">
+                        <a class="btn btn-ghost nomal-case text-lg" href="${rq.loginUri}">로그인</a>
+                    </c:if>
                 </div>
             </header>
-            <div class="bg-[url('/resource/main_image.jpg')] h-full w-full">
+            <div class="bg-[url('/resource/main_image.jpg')] bg-[#21212180] bg-blend-darken h-full w-full">
                 <div class="h-full w-full flex items-center justify-center">
-                    <div class="bg-black/80 p-5">
+                    <div class="">
                         <div class="text-[7rem]">
-                            <span class="text-[10rem] font-bold">COM</span>unity
+                            <span class="text-[10rem] font-bold text-[#07553B]">COM</span>unity
                         </div>
                         <div class="text-[7rem]">
-                            <span class="text-[10rem] font-bold">DEV</span>eloper
+                            <span class="text-[10rem] font-bold text-[#CED46A]">DEV</span>eloper
                         </div>
-                        <div class="text-2xl">COM-DEV는 개발자들이 자유롭게 코드를 공유할 수 있는 공간입니다.</div>
+                        <div class="text-2xl">COM-DEV is a space where developers can freely share code.</div>
                     </div>
                 </div>
 

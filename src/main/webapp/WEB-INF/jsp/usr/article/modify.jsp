@@ -75,8 +75,8 @@
                         </table>
                     </div>
                     <div class="flex justify-end mt-2">
-                        <button class="btn mx-2 bg-gray-700" type="submit">확인</button>
-                        <button class="btn" onclick="history.back();">뒤로가기</button>
+                        <button class="btn point_bg mx-2" type="submit">확인</button>
+                        <button class="btn point_bg" onclick="history.back();">뒤로가기</button>
                     </div>
                 </form>
 

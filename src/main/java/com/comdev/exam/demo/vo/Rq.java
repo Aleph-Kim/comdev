@@ -110,6 +110,8 @@ public class Rq {
     }
 
     public void logout() {
+        loginedMemberId = -1;
+        loginedMemberNow = null;
         httpSession.removeAttribute("LoginedMemberId");
         httpSession.removeAttribute("LoginedMember");
     }

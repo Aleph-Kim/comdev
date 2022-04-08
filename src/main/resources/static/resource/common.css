@@ -14,7 +14,6 @@ html > body .toastui-editor-md-code-block {
     font-family: "D2Coding", sans-serif;
     font-weight: 400;
     text-underline-position: under;
-    color: hsla(var(--bc) / var(--tw-text-opacity, 1));
 }
 
 html > body .toastui-editor-contents {
@@ -45,4 +44,8 @@ input {
 
 .table th:first-child {
     position: relative !important;
+}
+
+textarea, select {
+    transition-duration: 0s !important;
 }

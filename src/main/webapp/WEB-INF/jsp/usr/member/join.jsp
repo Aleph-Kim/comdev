@@ -204,8 +204,8 @@
                     </tbody>
                 </table>
                 <div class="mt-4 flex justify-end">
-                    <button class="btn mr-3">가입하기</button>
-                    <a href="javascript:history.back()" class="btn">뒤로가기</a>
+                    <button class="btn mr-3 point_bg">가입하기</button>
+                    <a href="javascript:history.back()" class="btn point_bg">뒤로가기</a>
                 </div>
             </form>
             <%@ include file="../common/foot.jspf" %>

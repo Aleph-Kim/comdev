@@ -55,9 +55,19 @@
                         form.submit();
                     }
                 </script>
-                <div class="overflow-y-auto w-full bg-gray-100/50">
+                <div class="flex flex-row-reverse mb-3">
+                    <button class="btn point_bg" onclick="history.back();">뒤로가기</button>
+                    <c:if test="${article.memberId == rq.loginedMemberId}">
+                        <a onclick="if (!confirm('정말 삭제하시겠습니까?')) return false;"
+                            href="/usr/article/doDelete?id=${article.id}&boardId=${board.id}" class="btn mx-2 point_bg">
+                            삭제
+                        </a>
+                        <a href="/usr/article/modify?id=${article.id}" class="btn point_bg">수정</a>
+                    </c:if>
+                </div>
+                <div class="overflow-y-auto w-full bg-gray-100/80 p-7 !text-[#434343] rounded">
                     <div class="flex items-center">
-                        <div class="text-3xl font-bold mr-4">${article.title}</div>
+                        <div class="text-2xl font-bold mr-4">${article.title}</div>
                         <div class="text-lg mr-4">${article.extra__writerName}</div>
                         <div class="mr-4">${article.forPrintType2RegDate}</div>
                         <div class="flex items-center article-detail__hit-count mr-4">
@@ -80,21 +90,11 @@
                             <span class="ml-1">${article.extra__LikePoint}</span>
                         </div>
                     </div>
-                        <div class="toast-ui-viewer">
+                        <div class="toast-ui-viewer mt-7 hover:bg-gray-200 p-5 rounded">
                             <script type="text/x-templates">
                                 ${article.body}
                             </script>
                         </div>
-                    </div>
-                    <div class="flex flex-row-reverse mb-3">
-                        <button class="btn" onclick="history.back();">뒤로가기</button>
-                        <c:if test="${article.memberId == rq.loginedMemberId}">
-                            <a onclick="if (!confirm('정말 삭제하시겠습니까?')) return false;"
-                                href="/usr/article/doDelete?id=${article.id}&boardId=${board.id}" class="btn mx-2">
-                                삭제
-                            </a>
-                            <a href="/usr/article/modify?id=${article.id}" class="btn">수정</a>
-                        </c:if>
                     </div>
                 </div>
                 <div class="mt-6 border-t w-full">
@@ -109,7 +109,7 @@
                                         <textarea rows="5" placeholder="댓글을 입력해주세요."
                                             class="textarea textarea-bordered w-full min-h-[10rem] max-w-full my-2 text-lg"
                                             name="body"></textarea>
-                                        <button class="btn ml-3">댓글 작성</button>
+                                        <button class="btn ml-3 point_bg">댓글 작성</button>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
@@ -141,8 +141,8 @@
                                             <textarea class="textarea textarea-bordered w-[95%]"
                                                 name="body">${reply.body}</textarea>
                                             <div class="flex flex-col ml-3">
-                                                <button class="btn whitespace-nowrap bg-gray-700">수정</button>
-                                                <input type="button" class="modify-close-btn btn mt-1 bg-gray-700"
+                                                <button class="btn whitespace-nowrap point_bg">수정</button>
+                                                <input type="button" class="modify-close-btn btn mt-1 point_bg"
                                                     value="취소" onsubmit="return false;"
                                                     onclick="modify_close('${reply.id}')" />
                                             </div>
@@ -151,7 +151,7 @@
                                 </div>
                             </c:if>
                             <div
-                                class="showReply-${reply.id} text-lg flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:border hover:bg-gray-300 hover:text-black">
+                                class="showReply-${reply.id} text-lg flex justify-between items-center min-h-[5rem] mt-3 px-5 hover:border hover:bg-gray-300 hover:text-black rounded">
                                 <div class="break-all p-3 max-w-[70%]">
                                     ${reply.body}
                                 </div>
@@ -163,10 +163,10 @@
                                         ${reply.forPrintType1RegDate}
                                     </span>
                                     <c:if test="${reply.memberId == rq.loginedMemberId}">
-                                        <button class="btn mx-3" onclick="reply_modify('${reply.id}')">
+                                        <button class="btn mx-3 point_bg" onclick="reply_modify('${reply.id}')">
                                             수정
                                         </button>
-                                        <a class="btn"
+                                        <a class="btn point_bg"
                                             href="../reply/doDelete?replyId=${reply.id}&articleId=${article.id}">
                                             삭제
                                         </a>

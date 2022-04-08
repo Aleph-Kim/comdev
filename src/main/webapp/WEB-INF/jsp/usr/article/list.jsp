@@ -15,7 +15,7 @@
                             <input type="text" name="searchKeyword" value="${param.searchKeyword}"
                                 class="bg-base-100 border base_border_color border-opacity-20">
                             <input type="hidden" name="boardId" value="${param.boardId}">
-                            <button class="btn">검색</button>
+                            <button class="btn point_bg">검색</button>
                         </div>
                     </form>
                 </div>
@@ -79,7 +79,7 @@
                         </c:if>
                     </c:if>
                     <c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
-                        <a class="btn ${page == i ? 'btn-active' : '' }" href="${pageBaseUri}&page=${i}">${i}</a>
+                        <a class="btn ${page == i ? 'btn-active, point_bg' : '' }" href="${pageBaseUri}&page=${i}">${i}</a>
                     </c:forEach>
                     <c:if test="${page + pageMenuArmLen < pageCount - 1}">
                         <button class="btn pageStartMore">...</button>

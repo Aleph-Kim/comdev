@@ -81,8 +81,8 @@
                         </table>
                     </div>
                     <div class="flex justify-end mt-2">
-                        <button class="btn mx-2">생성</button>
-                        <button class="btn" onclick="history.back();">취소</button>
+                        <button class="btn point_bg  mx-2">생성</button>
+                        <button class="btn point_bg " onclick="history.back();">취소</button>
                     </div>
                 </form>
 

@@ -83,7 +83,7 @@
                         <tr class="passwordModifyBtn">
                             <th>비밀번호</th>
                             <td>
-                                <a class="btn" onclick="modify('password')">변경하기</a>
+                                <a class="btn point_bg " onclick="modify('password')">변경하기</a>
                             </td>
                         </tr>
                         <tr class="passwordModify hidden">
@@ -100,20 +100,20 @@
                                 <input type="password"
                                     class="text-black w-[40%] h-12 border base_border_color border-opacity-20 newPasswordInput"
                                     placeholder="password check" name="newPasswordCheck">
-                                <a class="btn"
+                                <a class="btn point_bg "
                                     onclick="cancell('password'); javascript:$('.newPasswordInput').val('')">취소</a>
                             </td>
                         </tr>
                         <tr>
                             <th>이름</th>
                             <td>
-                                <a class="btn nameModifyBtn" onclick="modify('name')">변경하기</a>
+                                <a class="btn point_bg  nameModifyBtn" onclick="modify('name')">변경하기</a>
                                 <div class="nameModify hidden">
                                     <c:set var="name" value="${rq.loginedMemberNow.name}" />
                                     <input type="text" value="${name}"
                                         class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
                                         placeholder="name" id="nameInput" name="name">
-                                    <a class="btn"
+                                    <a class="btn point_bg "
                                         onclick="cancell('name'); javascript:$('#nameInput').val('${name}')">취소</a>
                                 </div>
                             </td>
@@ -121,13 +121,13 @@
                         <tr>
                             <th>닉네임</th>
                             <td>
-                                <a class="btn nicknameModifyBtn" onclick="modify('nickname')">변경하기</a>
+                                <a class="btn point_bg  nicknameModifyBtn" onclick="modify('nickname')">변경하기</a>
                                 <div class="nicknameModify hidden">
                                     <c:set var="nickname" value="${rq.loginedMemberNow.nickname}" />
                                     <input type="text" value="${nickname}"
                                         class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
                                         placeholder="nickname" id="nicknameInput" name="nickname">
-                                    <a class="btn"
+                                    <a class="btn point_bg "
                                         onclick="cancell('nickname'); javascript:$('#nicknameInput').val('${nickname}')">취소</a>
                                 </div>
                             </td>
@@ -135,13 +135,13 @@
                         <tr>
                             <th>전화번호</th>
                             <td>
-                                <a class="btn cellphoneNoModifyBtn" onclick="modify('cellphoneNo')">변경하기</a>
+                                <a class="btn point_bg  cellphoneNoModifyBtn" onclick="modify('cellphoneNo')">변경하기</a>
                                 <div class="cellphoneNoModify hidden">
                                     <c:set var="cellphoneNo" value="${rq.loginedMemberNow.cellphoneNo}" />
                                     <input type="text" value="${cellphoneNo}"
                                         class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
                                         placeholder="cellphoneNo" id="cellphoneNoInput" name="cellphoneNo">
-                                    <a class="btn"
+                                    <a class="btn point_bg "
                                         onclick="cancell('cellphoneNo'); javascript:$('#cellphoneNoInput').val('${cellphoneNo}')">취소</a>
                                 </div>
                             </td>
@@ -149,13 +149,13 @@
                         <tr>
                             <th>이메일</th>
                             <td>
-                                <a class="btn emailModifyBtn" onclick="modify('email')">변경하기</a>
+                                <a class="btn point_bg  emailModifyBtn" onclick="modify('email')">변경하기</a>
                                 <div class="emailModify hidden">
                                     <c:set var="email" value="${rq.loginedMemberNow.email}" />
                                     <input type="text" value="${email}"
                                         class="text-black w-[40%] h-12 border base_border_color border-opacity-20 "
                                         placeholder="email" id="emailInput" name="email">
-                                    <a class="btn"
+                                    <a class="btn point_bg "
                                         onclick="cancell('email'); javascript:$('#emailInput').val('${email}')">취소</a>
                                 </div>
                             </td>
@@ -163,8 +163,8 @@
                     </tbody>
                 </table>
                 <div class="mt-4 flex justify-end">
-                    <button class="btn mr-3">수정완료</button>
-                    <a href="javascript:history.back()" class="btn">뒤로가기</a>
+                    <button class="btn point_bg  mr-3">수정완료</button>
+                    <a href="javascript:history.back()" class="btn point_bg">뒤로가기</a>
                 </div>
             </form>
 

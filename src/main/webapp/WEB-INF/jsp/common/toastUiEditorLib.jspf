@@ -92,12 +92,6 @@
             padding-top: calc(100% / 1 * 2);
         }
 
-        /* toast Ui viewer 커스텀 */
-        .toastui-editor-contents p {
-
-            font-size: medium;
-            color: hsla(var(--bc) / var(--tw-text-opacity, 1)) !important;
-        }
 
         .toastui-editor-contents h1,
         h2,
