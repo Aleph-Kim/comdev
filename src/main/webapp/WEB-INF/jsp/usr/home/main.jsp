@@ -22,7 +22,8 @@
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
 
             <!-- 폰트어썸 불러오기 -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 
             <!-- 사이트 공통 CSS -->
             <link rel="stylesheet" href="/resource/common.css" />
