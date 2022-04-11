@@ -41,7 +41,7 @@
                     <a class="btn btn-ghost nomal-case text-lg " href="/">홈</a>
                     <div class="dropdown dropdown-hover text-lg point_color">
                         <label tabindex="0" class="btn btn-ghost text-lg rounded-btn">게시판</label>
-                        <ul tabindex="0" class="dropdown-content menu p-2 bg-[#d3d3d390] rounded-box w-52">
+                        <ul tabindex="0" class="dropdown-content menu p-2 bg-[#d3d3d390] rounded-box w-52 absolute right-0">
                             <li><a href="/usr/article/list?boardId=1">공지 게시판</a></li>
                             <li><a href="/usr/article/list?boardId=1">자유 게시판</a></li>
                             <li><a href="/usr/article/list?boardId=1">팁 게시판</a></li>
