@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ tagliburi="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <c:set var="pageTitle" value="로그인" />
+        <c:set var="pageTitle" value="비밀번호 확인" />
         <%@ include file="../common/head.jspf" %>
             <div class="flex items-center justify-center min-h-[75vh] bg-gray-300/50 rounded-md">
                 <div class="flex justify-center px-8 py-6 text-left bg-gray-100/50 min-w-[30vw]">

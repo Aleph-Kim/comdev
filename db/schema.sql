@@ -1,3 +1,5 @@
+USE comdev;
+
 # DB 생성
 DROP DATABASE IF EXISTS comdev;
 CREATE DATABASE comdev;
@@ -196,11 +198,11 @@ FROM reply;
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'tip',
-`name` = '팁 게시판';
+`code` = 'code question',
+`name` = '코드 질문 게시판';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'tech',
-`name` = '테크 게시판';
+`code` = 'QnA',
+`name` = 'QnA 게시판';
