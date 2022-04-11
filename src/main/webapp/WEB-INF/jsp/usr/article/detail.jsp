@@ -90,7 +90,7 @@
                             <span class="ml-1">${article.extra__LikePoint}</span>
                         </div>
                     </div>
-                        <div class="toast-ui-viewer mt-7 hover:bg-gray-200 p-5 rounded">
+                        <div class="toast-ui-viewer mt-7 p-5 rounded">
                             <script type="text/x-templates">
                                 ${article.body}
                             </script>
