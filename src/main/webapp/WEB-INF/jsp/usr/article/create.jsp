@@ -57,8 +57,8 @@
                                             <option readonly selected value="-1">-------- 게시판을 선택해주세요 --------</option>
                                             <option value="1">공지사항</option>
                                             <option value="2">자유게시판</option>
-                                            <option value="3">팁 게시판</option>
-                                            <option value="4">테크 게시판</option>
+                                            <option value="3">코드 질문 게시판</option>
+                                            <option value="4">QnA 게시판</option>
                                         </select>
                                     </td>
                                 </tr>

@@ -64,7 +64,7 @@
                                 <tr>
                                     <th>게시물 내용</th>
                                     <td class="!p-0">
-                                        <div class="toast-ui-editor">
+                                        <div class="toast-ui-editor bg-white/50">
                                             <script type="text/x-template">
                                                 ${article.body}
                                             </script>
